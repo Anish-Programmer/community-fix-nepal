@@ -1,4 +1,4 @@
-package model;
+package com.communityfix.model;
 
 public class Issue {
     // attributes

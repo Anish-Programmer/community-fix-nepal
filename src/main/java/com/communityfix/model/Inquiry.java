@@ -1,4 +1,5 @@
-package model;
+package com.communityfix.model;
+
 
 public class Inquiry {
     // attributes
