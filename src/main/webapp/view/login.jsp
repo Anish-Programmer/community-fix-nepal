@@ -20,7 +20,7 @@
     <title>Login - Community Fix Nepal</title>
 
     <%-- External CSS file for styling --%>
-    <link href="login.css" rel="stylesheet">
+    <link href="/register.css" rel="stylesheet">
 
     <%-- Google Fonts for typography --%>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
