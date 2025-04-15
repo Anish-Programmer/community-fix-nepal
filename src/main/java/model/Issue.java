@@ -1,6 +1,7 @@
 package model;
 
 public class Issue {
+    // attributes
     private int id;
     private int userId;
     private String category;
@@ -9,8 +10,10 @@ public class Issue {
     private String status;
     private String adminComment;
 
+    // empty constructor
     public Issue() {}
 
+    // parameterized constructor
     public Issue(int id, int userId, String category, String description, String imagePath, String status, String adminComment) {
         this.id = id;
         this.userId = userId;
@@ -21,6 +24,7 @@ public class Issue {
         this.adminComment = adminComment;
     }
 
+    // convience constructor
     public Issue(int userId, String category, String description, String imagePath, String status, String adminComment) {
         this.userId = userId;
         this.category = category;

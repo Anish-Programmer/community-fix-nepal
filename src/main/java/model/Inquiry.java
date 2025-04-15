@@ -1,14 +1,17 @@
 package model;
 
 public class Inquiry {
+    // attributes
     private int id;
     private String name;
     private String email;
     private String message;
     private String submittedAt;
 
+    // empty constructor
     public Inquiry() {}
 
+    // parameterized constructor
     public Inquiry(int id, String name, String email, String message, String submittedAt) {
         this.id = id;
         this.name = name;
@@ -17,6 +20,7 @@ public class Inquiry {
         this.submittedAt = submittedAt;
     }
 
+    // convience constructor
     public Inquiry(String name, String email, String message, String submittedAt) {
         this.name = name;
         this.email = email;
@@ -24,6 +28,7 @@ public class Inquiry {
         this.submittedAt = submittedAt;
     }
 
+    // getter and setter methods
     public int getId() {
         return id;
     }
@@ -64,3 +69,4 @@ public class Inquiry {
         this.submittedAt = submittedAt;
     }
 }
+
