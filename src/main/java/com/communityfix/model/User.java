@@ -1,43 +1,41 @@
 package com.communityfix.model;
 
 public class User {
-    // attributes
-    private int id;
+    private final int userId;
     private String username;
     private String password;
-    private String role;
+    private Role role;
     private String email;
     private String phone;
 
-    // empty constructor
-    public User() {}
+    public enum Role {
+        CITIZEN, ADMIN
+    }
 
-    // complete parameterized constructor
-    public User(int id, String username, String password, String role, String email, String phone) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
+    public User() {
+        this.userId = 0;
+    }
+
+    public User(String username, String password, Role role, String email, String phone) {
+        this.userId = 0;
+        setUsername(username);
+        setPassword(password);
         this.role = role;
-        this.email = email;
-        this.phone = phone;
+        setEmail(email);
+        setPhone(phone);
     }
 
-    // convience constructor
-    public User(String username, String password, String role, String email, String phone) {
-        this.username = username;
-        this.password = password;
+    public User(int userId, String username, String password, Role role, String email, String phone) {
+        this.userId = userId;
+        setUsername(username);
+        setPassword(password);
         this.role = role;
-        this.email = email;
-        this.phone = phone;
+        setEmail(email);
+        setPhone(phone);
     }
 
-    // getter an setter methods
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public int getUserId() {
+        return userId;
     }
 
     public String getUsername() {
@@ -45,6 +43,9 @@ public class User {
     }
 
     public void setUsername(String username) {
+        if (username == null || username.trim().isEmpty() || username.length() > 20) {
+            throw new IllegalArgumentException("Username must be 1-20 characters");
+        }
         this.username = username;
     }
 
@@ -53,14 +54,20 @@ public class User {
     }
 
     public void setPassword(String password) {
+        if (password == null || password.length() < 6) {
+            throw new IllegalArgumentException("Password must be at least 6 characters");
+        }
         this.password = password;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
+        if (role == null) {
+            throw new IllegalArgumentException("Role cannot be null");
+        }
         this.role = role;
     }
 
@@ -69,6 +76,9 @@ public class User {
     }
 
     public void setEmail(String email) {
+        if (email != null && email.length() > 100) {
+            throw new IllegalArgumentException("Email must be under 100 characters");
+        }
         this.email = email;
     }
 
@@ -77,6 +87,9 @@ public class User {
     }
 
     public void setPhone(String phone) {
+        if (phone != null && phone.length() > 20) {
+            throw new IllegalArgumentException("Phone must be under 20 characters");
+        }
         this.phone = phone;
     }
 }

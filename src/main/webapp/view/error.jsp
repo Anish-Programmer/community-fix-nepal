@@ -5,12 +5,18 @@
   Time: 11:43 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Error</title>
+    <title>Error - CommunityFix Nepal</title>
+    <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
-
+<div class="form-container">
+    <h2>Error</h2>
+    <p class="error">An unexpected error occurred. Please try again.</p>
+    <p><a href="view/index.jsp">Back to Home</a></p>
+</div>
 </body>
 </html>
