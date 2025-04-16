@@ -3,16 +3,16 @@
 <html>
 <head>
     <title>CommunityFix Nepal</title>
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.css">
 </head>
 <body>
 <div class="form-container">
     <h1>Welcome to CommunityFix Nepal</h1>
     <% if (session.getAttribute("user") == null) { %>
-    <p><a href="view/login.jsp">Login</a> | <a href="view/register.jsp">Register</a></p>
+    <p><a href="${pageContext.request.contextPath}/LoginServlet">Login</a> | <a href="RegisterServlet">Register</a></p>
     <% } else { %>
     <p>Welcome, <%= ((com.communityfix.model.User) session.getAttribute("user")).getUsername() %>!</p>
-    <p><a href="LogoutServlet">Logout</a></p>
+    <p><a href="${pageContext.request.contextPath}/LogoutServlet">Logout</a></p>
     <% } %>
 </div>
 </body>

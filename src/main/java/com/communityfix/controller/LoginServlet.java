@@ -18,7 +18,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("view/login.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
     }
 
     @Override
@@ -31,20 +31,22 @@ public class LoginServlet extends HttpServlet {
             User user = userService.loginUser(username, password);
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            session.setMaxInactiveInterval(30 * 60); // 30 minutes
+            session.setMaxInactiveInterval(30 * 60);
 
             if ("on".equals(rememberMe)) {
                 Cookie usernameCookie = new Cookie("username", username);
-                usernameCookie.setMaxAge(7 * 24 * 60 * 60); // 7 days
+                usernameCookie.setMaxAge(7 * 24 * 60 * 60);
                 response.addCookie(usernameCookie);
             }
 
-            response.sendRedirect("view/index.jsp");
+            response.sendRedirect("index.jsp");
+
         } catch (IllegalArgumentException e) {
             request.setAttribute("errorMessage", e.getMessage());
-            request.getRequestDispatcher("view/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
         } catch (Exception e) {
-            response.sendRedirect("view/error.jsp");
+//            response.sendRedirect("${pageContext.request.contextPath}/WEB-INF/view/error.jsp");
+            request.getRequestDispatcher("/WEB-INF/view/error.jsp").forward(request, response);
         }
     }
 }

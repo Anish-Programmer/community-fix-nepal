@@ -10,8 +10,8 @@
 <html>
 <head>
     <title>Login - CommunityFix Nepal</title>
-    <link rel="stylesheet" href="static/css/style.css">
-    <script src="static/js/scripts.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.css">
+    <script src="${pageContext.request.contextPath}/static/js/scripts.js"></script>
 </head>
 <body>
 <div class="form-container">
@@ -27,14 +27,14 @@
     <% if (error != null) { %>
     <p class="error"><%= error %></p>
     <% } %>
-    <form action="LoginServlet" method="post" onsubmit="return validateLoginForm()">
+    <form action="${pageContext.request.contextPath}/LoginServlet" method="post" onsubmit="return validateLoginForm()">
         <input type="text" id="username" name="username" placeholder="Username"
                value="<%= cookieUsername != null ? cookieUsername : "" %>" required>
         <input type="password" id="password" name="password" placeholder="Password" required>
         <label><input type="checkbox" name="rememberMe"> Remember me</label>
         <button type="submit">Login</button>
     </form>
-    <p>Don't have an account? <a href="view/register.jsp">Register</a></p>
+    <p>Don't have an account? <a href="${pageContext.request.contextPath}/RegisterServlet">Register</a></p>
 </div>
 </body>
 </html>

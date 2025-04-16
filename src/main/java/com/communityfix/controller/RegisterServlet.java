@@ -15,7 +15,7 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("view/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/register.jsp").forward(request, response);
     }
 
     @Override
@@ -27,12 +27,13 @@ public class RegisterServlet extends HttpServlet {
 
         try {
             userService.registerUser(username, password, email, phone);
-            response.sendRedirect("view/login.jsp?success=Registration successful. Please log in.");
+            response.sendRedirect("LoginServlet?success=Registration successful. Please log in.");
         } catch (IllegalArgumentException e) {
             request.setAttribute("errorMessage", e.getMessage());
-            request.getRequestDispatcher("view/register.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/view/register.jsp").forward(request, response);
         } catch (Exception e) {
-            response.sendRedirect("view/error.jsp");
+//            response.sendRedirect("/WEB-INF/view/error.jsp");
+            request.getRequestDispatcher("/WEB-INF/view/error.jsp").forward(request, response);
         }
     }
 }

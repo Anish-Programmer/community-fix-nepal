@@ -10,13 +10,13 @@
 <html>
 <head>
     <title>Error - CommunityFix Nepal</title>
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.css">
 </head>
 <body>
 <div class="form-container">
     <h2>Error</h2>
     <p class="error">An unexpected error occurred. Please try again.</p>
-    <p><a href="view/index.jsp">Back to Home</a></p>
+    <p><a href="${pageContext.request.contextPath}/index.jsp">Back to Home</a></p>
 </div>
 </body>
 </html>
