@@ -8,10 +8,10 @@
     <title>Login - Community Fix Nepal</title>
 
     <!-- Linking to custom stylesheet located in /static/css/login.css -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/login.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/login.css">
 
 
-    <script src="${pageContext.request.contextPath}/static/js/scripts.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/scripts.js"></script>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -22,7 +22,7 @@
     <!-- Left side image section -->
     <div class="left-image">
         <!-- Dynamic path to the login illustration image -->
-        <img src="${pageContext.request.contextPath}/Images/Login-form-Side.png" alt="Login Image">
+        <img src="${pageContext.request.contextPath}/assets/images/Login-form-Side.png" alt="Login Image" >
     </div>
 
     <!-- Right side form section -->

@@ -6,15 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CommunityFix Nepal - Empowering Communities</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/all.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/index.css">
 </head>
 <body>
 <!-- Header -->
 <header class="header">
     <div class="header-container">
         <div class="logo">
-            <img src="${pageContext.request.contextPath}/Images/Logo.png" alt="CommunityFix Nepal Logo">
+            <img src="${pageContext.request.contextPath}/assets/images/logo.jpeg" alt="CommunityFix Nepal Logo">
             <span class="logo-text">Community Fix Nepal</span>
         </div>
 
@@ -28,8 +27,8 @@
             <%
                 if (session.getAttribute("user") == null) {
             %>
-            <a href="${pageContext.request.contextPath}/login.jsp" class="btn btn-outline">Login</a>
-            <a href="${pageContext.request.contextPath}/register.jsp" class="btn btn-primary">Register</a>
+            <a href="${pageContext.request.contextPath}/LoginServlet" class="btn btn-outline">Login</a>
+            <a href="${pageContext.request.contextPath}/RegisterServlet" class="btn btn-primary">Register</a>
             <%
             } else {
             %>
@@ -53,12 +52,12 @@
             <h1>Empowering Communities Through Civic Engagement</h1>
             <p>Report and track community issues in your neighborhood. Together, we can build better communities across Nepal.</p>
             <div class="hero-buttons">
-                <a href="${pageContext.request.contextPath}/register.jsp" class="btn btn-primary btn-lg">Get Started</a>
+                <a href="${pageContext.request.contextPath}/RegisterServlet" class="btn btn-primary btn-lg">Get Started</a>
                 <a href="${pageContext.request.contextPath}/about.jsp" class="btn btn-outline btn-lg">Learn More</a>
             </div>
         </div>
         <div class="hero-image">
-            <img src="${pageContext.request.contextPath}/Images/Homepage.png" alt="Community Engagement Illustration">
+            <img src="${pageContext.request.contextPath}/assets/images/background%20final.jpeg" alt="Community Engagement Illustration">
         </div>
     </div>
 </section>

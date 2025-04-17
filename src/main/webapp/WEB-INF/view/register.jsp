@@ -7,7 +7,7 @@
     <title>Register - Community Fix Nepal</title>
 
     <!-- Linking to external stylesheet for styling -->
-    <link href="${pageContext.request.contextPath}/static/css/register.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/assets/css/register.css" rel="stylesheet">
 
     <!-- Google Fonts for the page -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
 
     <!-- Left Image Section -->
     <div class="left-image">
-        <img src="${pageContext.request.contextPath}/Images/RegisterSideimage.jpg" alt="Registration Illustration">
+        <img src="${pageContext.request.contextPath}/assets/images/RegisterSideimage.jpg" alt="Registration Illustration">
     </div>
 
     <!-- Right Form Section -->
@@ -38,11 +38,6 @@
 
         <!-- Registration Form -->
         <form action="${pageContext.request.contextPath}/RegisterServlet" method="post" class="form">
-            <!-- Full Name -->
-            <div class="form-group">
-                <label for="fullname">Full Name</label>
-                <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
-            </div>
 
             <!-- Username -->
             <div class="form-group">
