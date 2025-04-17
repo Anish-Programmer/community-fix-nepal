@@ -1,41 +1,70 @@
-/* Center the body content and apply basic styling */
+/* Reset & base styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Ensures padding doesn't add to element size */
+}
+
 body {
+    font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+    background-color: #f5f5f5;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #f5f5f5;
+    min-height: 100vh; /* Full screen height */
 }
 
-/* Container box for the login form */
-.container {
+/* Wrapper for login page containing both image and form */
+.login-wrapper {
+    display: flex;
+    width: 900px;
+    height: 600px;
     background-color: #ffffff;
-    padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-    box-sizing: border-box;
+    overflow: hidden; /* Keeps child elements within rounded corners */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Soft drop shadow */
 }
 
-/* Headings (main title) */
+/* Left image section */
+.left-image {
+    flex: 1;
+    background-color: #e3e3e3;
+}
+
+.left-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintains aspect ratio, fills container */
+    display: block;
+}
+
+/* Right side form container */
+.container {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Main heading styles */
 h1 {
-    font-size: 24px;
+    font-size: 28px;
+    font-weight: 600;
     text-align: center;
     margin-bottom: 10px;
-    color: #2A7A8C;
+    color: #2A7A8C; /* Teal-like color */
 }
 
-/* Subtitle or welcome text */
+/* Optional subheading for welcome message */
 .welcome-message {
     text-align: center;
-    color: #555;
+    font-size: 14px;
+    color: #666;
     margin-bottom: 20px;
 }
 
-/* Alert box styling (success or error) */
+/* General alert box styling */
 .alert {
     padding: 10px;
     margin-bottom: 15px;
@@ -43,63 +72,63 @@ h1 {
     font-size: 0.9rem;
 }
 
-/* Success alert styling */
+/* Success alert (e.g. logout success) */
 .alert-success {
     background-color: #D1FAE5;
     color: #065F46;
     border: 1px solid #A7F3D0;
 }
 
-/* Error alert styling */
+/* Error alert (e.g. login failed) */
 .alert-error {
     background-color: #FECACA;
     color: #B91C1C;
     border: 1px solid #FCA5A5;
 }
 
-/* General form styling */
+/* Overall form layout */
 .form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 15px; /* Space between form elements */
 }
 
-/* Style for each input group */
+/* Grouping label and input */
 .form-group {
     display: flex;
     flex-direction: column;
 }
 
-/* Label styling */
+/* Input label styling */
 label {
     font-weight: 600;
     margin-bottom: 5px;
     color: #333;
 }
 
-/* Text and password input fields */
+/* Input fields styling */
 input[type="text"],
 input[type="password"] {
-    padding: 8px 10px;
-    border-radius: 4px;
-    border: 1px solid #e0e0e0;
-    font-size: 1rem;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    margin-top: 5px;
 }
 
-/* Help text under input fields */
+/* Help text under inputs */
 .form-help {
-    font-size: 0.8rem;
+    font-size: 12px;
     color: #888;
-    margin-top: 3px;
+    margin-top: 5px;
 }
 
-/* Remember me section styling */
+/* "Remember me" checkbox section */
 .remember-me-group {
     display: flex;
     align-items: center;
 }
 
-/* Label for the remember me checkbox */
 .remember-me-label {
     display: flex;
     align-items: center;
@@ -108,54 +137,60 @@ input[type="password"] {
     color: #333;
 }
 
-/* Spacing for checkbox */
 .remember-me-label input[type="checkbox"] {
     margin-right: 8px;
 }
 
 /* Base button styling */
 .btn {
-    border-radius: 4px;
+    border-radius: 6px;
     border: none;
     cursor: pointer;
-    transition: all 0.2s ease;
-    font-size: 1rem;
-    padding: 10px;
+    font-size: 16px;
+    padding: 12px;
     font-weight: bold;
+    width: 100%;
 }
 
-/* Primary button color */
+/* Primary button styling (login button) */
 .btn-primary {
-    background-color: #F4A460;
+    background-color: #F4A460; /* Sandy brown */
     color: white;
 }
 
-/* Hover effect for primary button */
 .btn-primary:hover {
-    background-color: #E68A45;
+    background-color: #E68A45; /* Darker brown on hover */
 }
 
-/* Footer text below the form */
+/* Footer section under the form */
 .form-footer {
     margin-top: 20px;
     text-align: center;
 }
 
-/* Link styling in the footer */
+/* Footer links styling */
 .form-footer a {
     color: #2A7A8C;
     text-decoration: none;
-    margin: 0 5px;
 }
 
-/* Link hover effect */
 .form-footer a:hover {
     text-decoration: underline;
 }
 
-/* Responsive styling for small devices */
-@media (max-width: 480px) {
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .login-wrapper {
+        flex-direction: column; /* Stack image and form vertically */
+        width: 90%;
+        height: auto;
+    }
+
+    .left-image {
+        height: 200px; /* Adjust image height */
+    }
+
     .container {
-        padding: 20px;
+        padding: 30px 20px;
     }
 }
