@@ -14,13 +14,14 @@ public class User {
 
     public User() {
         this.userId = 0;
+        this.role = Role.CITIZEN;
     }
 
     public User(String username, String password, Role role, String email, String phone) {
         this.userId = 0;
         setUsername(username);
         setPassword(password);
-        this.role = role;
+        this.role = (role != null) ? role : Role.CITIZEN;
         setEmail(email);
         setPhone(phone);
     }
@@ -29,7 +30,7 @@ public class User {
         this.userId = userId;
         setUsername(username);
         setPassword(password);
-        this.role = role;
+        this.role = (role != null) ? role : Role.CITIZEN;
         setEmail(email);
         setPhone(phone);
     }
@@ -43,8 +44,8 @@ public class User {
     }
 
     public void setUsername(String username) {
-        if (username == null || username.trim().isEmpty() || username.length() > 20) {
-            throw new IllegalArgumentException("Username must be 1-20 characters");
+        if (username == null || username.trim().isEmpty() || username.length() > 20 || !username.matches("^[a-zA-Z0-9]{3,20}$")) {
+            throw new IllegalArgumentException("Username must be 3-20 alphanumeric characters");
         }
         this.username = username;
     }
@@ -65,10 +66,7 @@ public class User {
     }
 
     public void setRole(Role role) {
-        if (role == null) {
-            throw new IllegalArgumentException("Role cannot be null");
-        }
-        this.role = role;
+        this.role = (role != null) ? role : Role.CITIZEN;
     }
 
     public String getEmail() {

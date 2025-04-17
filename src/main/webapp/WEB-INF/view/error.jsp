@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Error - CommunityFix Nepal</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 </head>
 <body>
 <div class="form-container">

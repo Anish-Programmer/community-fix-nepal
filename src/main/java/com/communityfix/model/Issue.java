@@ -1,61 +1,38 @@
 package com.communityfix.model;
 
 public class Issue {
-    // attributes
-    private int id;
-    private int userId;
-    private String category;
+    private int issueId;
     private String description;
     private String imagePath;
-    private String status;
+    private Status status;
     private String adminComment;
+    private int userId;
+    private int categoryId;
 
-    // empty constructor
-    public Issue() {}
+    public enum Status {
+        PENDING, IN_PROGRESS, RESOLVED
+    }
 
-    // parameterized constructor
-    public Issue(int id, int userId, String category, String description, String imagePath, String status, String adminComment) {
-        this.id = id;
+    public Issue() {
+        this.status = Status.PENDING;
+    }
+
+    public Issue(int issueId, String description, String imagePath, Status status, String adminComment, int userId, int categoryId) {
+        this.issueId = issueId;
+        setDescription(description);
+        setImagePath(imagePath);
+        setStatus(status);
+        setAdminComment(adminComment);
         this.userId = userId;
-        this.category = category;
-        this.description = description;
-        this.imagePath = imagePath;
-        this.status = status;
-        this.adminComment = adminComment;
+        this.categoryId = categoryId;
     }
 
-    // convience constructor
-    public Issue(int userId, String category, String description, String imagePath, String status, String adminComment) {
-        this.userId = userId;
-        this.category = category;
-        this.description = description;
-        this.imagePath = imagePath;
-        this.status = status;
-        this.adminComment = adminComment;
+    public int getIssueId() {
+        return issueId;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
+    public void setIssueId(int issueId) {
+        this.issueId = issueId;
     }
 
     public String getDescription() {
@@ -63,6 +40,9 @@ public class Issue {
     }
 
     public void setDescription(String description) {
+        if (description == null || description.trim().isEmpty()) {
+            throw new IllegalArgumentException("Description cannot be empty");
+        }
         this.description = description;
     }
 
@@ -74,12 +54,12 @@ public class Issue {
         this.imagePath = imagePath;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus(Status status) {
+        this.status = (status != null) ? status : Status.PENDING;
     }
 
     public String getAdminComment() {
@@ -88,5 +68,21 @@ public class Issue {
 
     public void setAdminComment(String adminComment) {
         this.adminComment = adminComment;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 }

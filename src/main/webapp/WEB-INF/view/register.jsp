@@ -4,17 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Community Fix Nepal</title>
-
-    <!-- Linking to external stylesheet for styling -->
+    <title>Register - CommunityFix Nepal</title>
     <link href="${pageContext.request.contextPath}/assets/css/register.css" rel="stylesheet">
-
-    <!-- Google Fonts for the page -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="${pageContext.request.contextPath}/assets/js/scripts.js"></script>
 </head>
 <body>
 <div class="register-wrapper">
-
     <!-- Left Image Section -->
     <div class="left-image">
         <img src="${pageContext.request.contextPath}/assets/images/RegisterSideimage.jpg" alt="Registration Illustration">
@@ -24,12 +20,6 @@
     <div class="container">
         <h1>Create Account</h1>
 
-        <!-- Success message -->
-        <% String successMessage = (String) request.getAttribute("successMessage"); %>
-        <% if (successMessage != null) { %>
-        <div class="alert alert-success"><%= successMessage %></div>
-        <% } %>
-
         <!-- Error message -->
         <% String errorMessage = (String) request.getAttribute("errorMessage"); %>
         <% if (errorMessage != null) { %>
@@ -37,18 +27,23 @@
         <% } %>
 
         <!-- Registration Form -->
-        <form action="${pageContext.request.contextPath}/RegisterServlet" method="post" class="form">
-
+        <form action="${pageContext.request.contextPath}/RegisterServlet" method="post" class="form" onsubmit="return validateRegisterForm()">
             <!-- Username -->
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Choose a username" required>
+                <input type="text" id="username" name="username" placeholder="Choose a username (letters and numbers)" required>
             </div>
 
             <!-- Email -->
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <input type="email" id="email" name="email" placeholder="Enter your email (optional)">
+            </div>
+
+            <!-- Phone -->
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" id="phone" name="phone" placeholder="Enter your phone (optional)">
             </div>
 
             <!-- Password -->
@@ -61,14 +56,6 @@
             <div class="form-group">
                 <label for="confirm-password">Confirm Password</label>
                 <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
-            </div>
-
-            <!-- Terms Agreement -->
-            <div class="terms-group">
-                <label class="terms-label">
-                    <input type="checkbox" name="terms" required>
-                    <span>I agree to the <a href="${pageContext.request.contextPath}/terms.html">Terms of Service</a> and <a href="${pageContext.request.contextPath}/privacy.html">Privacy Policy</a></span>
-                </label>
             </div>
 
             <!-- Submit Button -->

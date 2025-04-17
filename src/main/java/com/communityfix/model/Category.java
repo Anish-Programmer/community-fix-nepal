@@ -1,120 +1,32 @@
 package com.communityfix.model;
 
 public class Category {
-    // attributes
-    private int id;
-    private String name;
-    private String description;
+    private int categoryId;
+    private String categoryName;
 
-    // empty constructor
     public Category() {}
 
-    // parameterized constructor
-    public Category(int id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
+    public Category(int categoryId, String categoryName) {
+        this.categoryId = categoryId;
+        setCategoryName(categoryName);
     }
 
-    // convience constructor
-    public Category(String name, String description) {
-        this.name = name;
-        this.description = description;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    // getter and setter methods
-    public int getId() {
-        return id;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public static class Inquiry {
-        // attributes
-        private int id;
-        private String name;
-        private String email;
-        private String message;
-        private String submittedAt;
-
-        // empty constructor
-        public Inquiry() {}
-
-        // parameterized constructor
-        public Inquiry(int id, String name, String email, String message, String submittedAt) {
-            this.id = id;
-            this.name = name;
-            this.email = email;
-            this.message = message;
-            this.submittedAt = submittedAt;
+    public void setCategoryName(String categoryName) {
+        if (categoryName == null || categoryName.trim().isEmpty() || categoryName.length() > 50) {
+            throw new IllegalArgumentException("Category name must be 1-50 characters");
         }
-
-        // convience constructor
-        public Inquiry(String name, String email, String message, String submittedAt) {
-            this.name = name;
-            this.email = email;
-            this.message = message;
-            this.submittedAt = submittedAt;
-        }
-
-        // getter and setter methods
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
-        }
-
-        public String getSubmittedAt() {
-            return submittedAt;
-        }
-
-        public void setSubmittedAt(String submittedAt) {
-            this.submittedAt = submittedAt;
-        }
+        this.categoryName = categoryName;
     }
 }
-

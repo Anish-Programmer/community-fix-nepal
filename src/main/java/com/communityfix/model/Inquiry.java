@@ -1,57 +1,43 @@
 package com.communityfix.model;
 
+import java.time.LocalDateTime;
 
 public class Inquiry {
-    // attributes
-    private int id;
-    private String name;
-    private String email;
+    private int inquiryId;
+    private String inquiryName;
     private String message;
-    private String submittedAt;
+    private LocalDateTime submittedAt;
+    private int userId;
 
-    // empty constructor
-    public Inquiry() {}
-
-    // parameterized constructor
-    public Inquiry(int id, String name, String email, String message, String submittedAt) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.message = message;
-        this.submittedAt = submittedAt;
+    public Inquiry() {
+        this.submittedAt = LocalDateTime.now();
     }
 
-    // convience constructor
-    public Inquiry(String name, String email, String message, String submittedAt) {
-        this.name = name;
-        this.email = email;
-        this.message = message;
-        this.submittedAt = submittedAt;
+    public Inquiry(int inquiryId, String inquiryName, String message, LocalDateTime submittedAt, int userId) {
+        this.inquiryId = inquiryId;
+        setInquiryName(inquiryName);
+        setMessage(message);
+        this.submittedAt = submittedAt != null ? submittedAt : LocalDateTime.now();
+        this.userId = userId;
     }
 
-    // getter and setter methods
-    public int getId() {
-        return id;
+    public int getInquiryId() {
+        return inquiryId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setInquiryId(int inquiryId) {
+        this.inquiryId = inquiryId;
     }
 
-    public String getName() {
-        return name;
+    public String getInquiryName() {
+        return inquiryName;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setInquiryName(String inquiryName) {
+        if (inquiryName == null || inquiryName.trim().isEmpty() || inquiryName.length() > 100) {
+            throw new IllegalArgumentException("Inquiry name must be 1-100 characters");
+        }
+        this.inquiryName = inquiryName;
     }
 
     public String getMessage() {
@@ -59,15 +45,25 @@ public class Inquiry {
     }
 
     public void setMessage(String message) {
+        if (message == null || message.trim().isEmpty()) {
+            throw new IllegalArgumentException("Message cannot be empty");
+        }
         this.message = message;
     }
 
-    public String getSubmittedAt() {
+    public LocalDateTime getSubmittedAt() {
         return submittedAt;
     }
 
-    public void setSubmittedAt(String submittedAt) {
-        this.submittedAt = submittedAt;
+    public void setSubmittedAt(LocalDateTime submittedAt) {
+        this.submittedAt = submittedAt != null ? submittedAt : LocalDateTime.now();
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }
-
