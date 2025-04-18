@@ -7,6 +7,7 @@
     <title>CommunityFix Nepal - Empowering Communities</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 <!-- Header -->
@@ -57,7 +58,7 @@
             </div>
         </div>
         <div class="hero-image">
-            <img src="${pageContext.request.contextPath}/assets/images/background%20final.jpeg" alt="Community Engagement Illustration">
+            <img src="${pageContext.request.contextPath}/assets/images/hero.jpeg" alt="Community Engagement Illustration">
         </div>
     </div>
 </section>
