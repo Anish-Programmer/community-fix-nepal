@@ -1,0 +1,314 @@
+/* Root Variables: Define color scheme, spacing, fonts, and reusable settings */
+:root {
+    --primary-color: #6366f1;
+    --primary-hover: #4f46e5;
+    --text-color: #111827;
+    --light-text: #4b5563;
+    --background: #f8fafc;
+    --card-bg: #ffffff;
+    --border-color: #e2e8f0;
+    --accent-color: #3b82f6;
+    --accent-hover: #2563eb;
+    --shadow: 0 10px 30px rgba(99, 102, 241, 0.08);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --error-color: #dc2626;
+    --success-color: #16a34a;
+    --border-radius: 0.5rem;
+    --font-size-base: 0.9375rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.375rem;
+}
+
+/* Reset default spacing and apply global font */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-sans);
+}
+
+/* Center layout and apply base styles */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--background);
+    color: var(--text-color);
+    padding: var(--spacing-md);
+}
+
+/* Main container with shadow and animations */
+.container {
+    width: 100%;
+    max-width: 650px;
+    padding: var(--spacing-xl);
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+    transform: translateY(20px);
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Heading style with gradient text */
+h1 {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    background: linear-gradient(135deg, #E68A45, ); /* <- NOTE: This gradient is incomplete */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* Welcome text with styling */
+.welcome-message {
+    margin-bottom: var(--spacing-xl);
+    background: linear-gradient(135deg, #64748b, #475569);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+    font-weight: 500;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Alert message styling */
+.alert {
+    padding: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    border-radius: var(--border-radius);
+    font-size: 0.95rem;
+    text-align: left;
+}
+
+/* Success and error alert types */
+.alert-success {
+    background-color: rgba(67, 102, 67, 0.1);
+    border-left: 3px solid var(--success-color);
+    color: var(--success-color);
+}
+.alert-error {
+    background-color: rgba(139, 67, 67, 0.1);
+    border-left: 3px solid var(--error-color);
+    color: var(--error-color);
+}
+
+/* Custom checkbox styling */
+.remember-me-group {
+    text-align: left;
+    margin: var(--spacing-sm) 0;
+}
+.remember-me-label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: var(--font-size-base);
+    color: var(--light-text);
+    transition: var(--transition);
+}
+.remember-me-label input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+}
+.checkmark {
+    height: 24px;
+    width: 24px;
+    background-color: transparent;
+    border: 1px solid var(--accent-color);
+    margin-right: var(--spacing-sm);
+}
+.remember-me-label:hover input ~ .checkmark {
+    background-color: rgba(139, 115, 85, 0.05);
+}
+.remember-me-label input:checked ~ .checkmark {
+    background-color: transparent;
+}
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 8px;
+    top: 4px;
+    width: 6px;
+    height: 12px;
+    border: solid var(--accent-color);
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+}
+.remember-me-label input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Button base styling */
+.btn {
+    display: block;
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin: var(--spacing-md) 0;
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    border-radius: var(--border-radius);
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+/* Button color variants */
+.btn-secondary {
+    background-color: #f3f4f6;
+    color: #374151;
+    border: 1px solid #e5e7eb;
+}
+.btn-secondary:hover {
+    background-color: #e5e7eb;
+    color: #1f2937;
+}
+.btn-outline {
+    background-color: transparent;
+    color: #E68A45;
+    border: 2px solid #F4A460;
+}
+.btn-outline:hover {
+    background-color: rgba(79, 70, 229, 0.05);
+}
+
+/* Gradient danger button */
+.btn-danger {
+    background-image: linear-gradient(135deg, #dc2626, #ef4444);
+    color: white;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
+}
+.btn-danger:hover {
+    background-image: linear-gradient(135deg, #b91c1c, #dc2626);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(220, 38, 38, 0.2);
+}
+
+/* Form styles */
+.form {
+    text-align: left;
+    margin: var(--spacing-lg) 0;
+}
+.form-group {
+    margin-bottom: var(--spacing-md);
+}
+.form-group label {
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-color);
+    font-weight: 400;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    background-color: white;
+}
+.form-group input:disabled {
+    background-color: var(--background);
+    color: var(--light-text);
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Form footer and help text */
+.form-help {
+    font-size: 0.8rem;
+    color: var(--light-text);
+}
+.form-footer {
+    margin-top: var(--spacing-lg);
+    font-size: 0.9rem;
+    color: var(--light-text);
+}
+.form-footer a {
+    color: var(--primary-color);
+}
+.form-footer a:hover {
+    text-decoration: underline;
+    color: var(--primary-hover);
+}
+
+/* Category button styles (possibly for admin panel) */
+.category-form .btn {
+    display: inline-block;
+    padding: 8px 16px;
+}
+.category-form .btn-primary {
+    background-color: #F4A460;
+    color: white;
+}
+.category-form .btn-primary:hover {
+    background-color: #E68A45;
+}
+.category-form .btn-danger {
+    background-color: #EF4444;
+    color: white;
+}
+.category-form .btn-danger:hover {
+    background-color: #DC2626;
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        padding: var(--spacing-lg);
+    }
+}
+@media (max-width: 480px) {
+    body {
+        padding: var(--spacing-xs);
+    }
+    .container {
+        padding: var(--spacing-md);
+    }
+    h1 {
+        font-size: 1.75rem;
+    }
+    .btn {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: 0.9rem;
+    }
+}
+
+/* Fade-in animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

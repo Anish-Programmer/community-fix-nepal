@@ -1,0 +1,139 @@
+body {
+    display: block;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+}
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #ffffff;
+    border-right: 1px solid #e0e0e0;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+    padding: 15px;
+    background-color: #ffffff;
+    overflow-y: auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #2A7A8C;
+    color: white;
+    border-bottom: 1px solid #e0e0e0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+    background-color: #2A7A8C;
+    padding: 15px;
+    margin: -15px -15px 15px -15px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+}
+
+.nav-menu {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.nav-item {
+    margin-bottom: 8px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover, .nav-link.active {
+    background-color: #2A7A8C;
+    color: white;
+}
+
+.nav-link i {
+    margin-right: 8px;
+    width: 20px;
+    text-align: center;
+}
+
+.report-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.char-count {
+    font-size: 0.8rem;
+    color: #9CA3AF;
+    text-align: right;
+    margin-top: 4px;
+}
+
+.footer {
+    padding: 15px;
+    background-color: #ffffff;
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.footer a {
+    color: #2A7A8C;
+    text-decoration: none;
+    margin: 0 8px;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .report-form {
+        padding: 10px;
+    }
+}
