@@ -20,8 +20,8 @@
 
         <nav class="nav-menu">
             <a href="${pageContext.request.contextPath}/" class="nav-link active">Home</a>
-            <a href="${pageContext.request.contextPath}/about.jsp" class="nav-link">About</a>
-            <a href="${pageContext.request.contextPath}/contact.jsp" class="nav-link">Contact</a>
+            <a href="${pageContext.request.contextPath}/WEB-INF/view/about.jsp" class="nav-link">About</a>
+            <a href="${pageContext.request.contextPath}/WEB-INF/view/contact.jsp" class="nav-link">Contact</a>
         </nav>
 
         <div class="auth-buttons">
@@ -33,8 +33,8 @@
             <%
             } else {
             %>
-            <a href="${pageContext.request.contextPath}/profile.jsp" class="btn btn-outline">Profile</a>
-            <a href="${pageContext.request.contextPath}/logout.jsp" class="btn btn-outline">Logout</a>
+            <a href="${pageContext.request.contextPath}/WEB-INF/view/profile.jsp" class="btn btn-outline">Profile</a>
+            <a href="${pageContext.request.contextPath}/WEB-INF/view/LoginServlet" class="btn btn-outline">Logout</a>
             <%
                 }
             %>
@@ -54,7 +54,7 @@
             <p>Report and track community issues in your neighborhood. Together, we can build better communities across Nepal.</p>
             <div class="hero-buttons">
                 <a href="${pageContext.request.contextPath}/RegisterServlet" class="btn btn-primary btn-lg">Get Started</a>
-                <a href="${pageContext.request.contextPath}/about.jsp" class="btn btn-outline btn-lg">Learn More</a>
+                <a href="${pageContext.request.contextPath}/WEB-INF/view/about.jsp" class="btn btn-outline btn-lg">Learn More</a>
             </div>
         </div>
         <div class="hero-image">
@@ -210,7 +210,7 @@
                     <p>"CommunityFix Nepal helped us get a dangerous pothole fixed in our neighborhood within a week. The platform is easy to use and the response was quick!"</p>
                 </div>
                 <div class="testimonial-author">
-                    <img src="${pageContext.request.contextPath}/Images/User-1.webp" alt="User Avatar" class="author-avatar">
+                    <img src="${pageContext.request.contextPath}/assets/images/User-1.jpeg" alt="User Avatar" class="author-avatar">
                     <div class="author-info">
                         <h4>Ramesh Sharma</h4>
                         <p>Jhapa</p>
@@ -222,7 +222,7 @@
                     <p>"As a community leader, this platform has made it much easier to collect and address concerns from residents. The tracking feature keeps everyone informed."</p>
                 </div>
                 <div class="testimonial-author">
-                    <img src="${pageContext.request.contextPath}/Images/User-2.webp" alt="User Avatar" class="author-avatar">
+                    <img src="${pageContext.request.contextPath}/assets/images/User-2.jpeg" alt="User Avatar" class="author-avatar">
                     <div class="author-info">
                         <h4>Rohan Thapa</h4>
                         <p>Dharan</p>
@@ -234,7 +234,7 @@
                     <p>"The street light in our area was broken for months. After reporting it through CommunityFix Nepal, it was fixed within days. Highly recommended!"</p>
                 </div>
                 <div class="testimonial-author">
-                    <img src="${pageContext.request.contextPath}/Images/User-3.webp" alt="User Avatar" class="author-avatar">
+                    <img src="${pageContext.request.contextPath}/assets/images/User-3.jpeg" alt="User Avatar" class="author-avatar">
                     <div class="author-info">
                         <h4>Bikash Rai</h4>
                         <p>Biratnagar</p>
@@ -251,7 +251,7 @@
         <div class="cta-content">
             <h2>Ready to Improve Your Community?</h2>
             <p>Join thousands of citizens making a difference across Nepal.</p>
-            <a href="${pageContext.request.contextPath}/register.jsp" class="btn btn-primary btn-lg">Sign Up Now</a>
+            <a href="${pageContext.request.contextPath}/RegisterServlet" class="btn btn-primary btn-lg">Sign Up Now</a>
         </div>
     </div>
 </section>
@@ -276,11 +276,11 @@
             <div class="footer-column">
                 <h3>Quick Links</h3>
                 <ul class="footer-links">
-                    <li><a href="${pageContext.request.contextPath}/"><i class="fas fa-chevron-right"></i> Home</a></li>
-                    <li><a href="${pageContext.request.contextPath}/about.jsp"><i class="fas fa-chevron-right"></i> About Us</a></li>
-                    <li><a href="${pageContext.request.contextPath}/services.jsp"><i class="fas fa-chevron-right"></i> Services</a></li>
-                    <li><a href="${pageContext.request.contextPath}/reports.jsp"><i class="fas fa-chevron-right"></i> Reports</a></li>
-                    <li><a href="${pageContext.request.contextPath}/contact.jsp"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+                    <li><a href="${pageContext.request.contextPath}/index.jsp"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/WEB-INF/view/about.jsp"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Services</a></li>
+                    <li><a href="${pageContext.request.contextPath}/LoginServlet"><i class="fas fa-chevron-right"></i> Reports</a></li>
+                    <li><a href="${pageContext.request.contextPath}/WEB-INF/view/contact.jsp"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
                 </ul>
             </div>
 
