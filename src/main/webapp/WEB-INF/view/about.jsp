@@ -6,26 +6,26 @@
     <title>About Us - Community Fix Nepal</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="about.css">
-</head>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/about.css">
+<%--</head>--%>
 <body>
 <!-- Header -->
 <header class="header">
     <div class="header-container">
         <div class="logo">
-            <img src="<%= request.getContextPath() %>/Images/Logo.png" alt="CommunityFix Nepal Logo">
+            <img src="<%= request.getContextPath() %>/assets/images/logo.jpeg" alt="CommunityFix Nepal Logo">
             <span class="logo-text">CommunityFix</span>
         </div>
 
         <nav class="nav-menu">
             <a href="<%= request.getContextPath() %>/" class="nav-link">Home</a>
-            <a href="<%= request.getContextPath() %>/about.jsp" class="nav-link active">About</a>
-            <a href="<%= request.getContextPath() %>/contact.jsp" class="nav-link">Contact</a>
+            <a href="<%= request.getContextPath() %>/AboutServlet" class="nav-link active">About</a>
+            <a href="<%= request.getContextPath() %>/ContactServlet" class="nav-link">Contact</a>
         </nav>
 
         <div class="auth-buttons">
-            <a href="<%= request.getContextPath() %>/login.jsp" class="btn btn-outline">Login</a>
-            <a href="<%= request.getContextPath() %>/register.jsp" class="btn btn-primary">Register</a>
+            <a href="<%= request.getContextPath() %>/LoginServlet" class="btn btn-outline">Login</a>
+            <a href="<%= request.getContextPath() %>/RegisterServlet" class="btn btn-primary">Register</a>
         </div>
 
         <button class="mobile-menu-btn">
@@ -68,7 +68,7 @@
                 </div>
             </div>
             <div class="mission-image">
-                <img src="<%= request.getContextPath() %>/Images/About.png" alt="Community Engagement">
+                <img src="<%= request.getContextPath() %>/assets/images/About.png" alt="Community Engagement">
                 <div class="image-shape"></div>
             </div>
         </div>
@@ -190,7 +190,7 @@
         <div class="team-grid">
             <div class="team-member animate">
                 <div class="member-image">
-                    <img src="<%= request.getContextPath() %>/Images/Samir.jpg" alt="Samir Bhandari">
+                    <img src="<%= request.getContextPath() %>/assets/images/User-1.jpeg" alt="Samir Bhandari">
                     <div class="member-social">
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -206,7 +206,7 @@
 
             <div class="team-member animate">
                 <div class="member-image">
-                    <img src="<%= request.getContextPath() %>/Images/Anish.jpg" alt="Bipan Thapa">
+                    <img src="<%= request.getContextPath() %>/assets/images/User-2.jpeg" alt="Anish Tamang">
                     <div class="member-social">
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -214,7 +214,7 @@
                     </div>
                 </div>
                 <div class="member-info">
-                    <h3>Aneesh Tamang</h3>
+                    <h3>Anish Tamang</h3>
                     <p class="member-role">Chief Technology Officer</p>
                     <p class="member-location"></p>
                 </div>
@@ -237,16 +237,16 @@
 
         <div class="partners-grid">
             <div class="partner-logo animate">
-                <img src="<%= request.getContextPath() %>/Images/Parterner-1.jpeg" alt="Partner 1">
+                <img src="<%= request.getContextPath() %>/assets/images/User-3.jpeg" alt="Partner 1">
             </div>
             <div class="partner-logo animate">
-                <img src="<%= request.getContextPath() %>/Images/Partner-2.jpg" alt="Partner 2">
+                <img src="<%= request.getContextPath() %>/assets/images/User-1.jpeg" alt="Partner 2">
             </div>
             <div class="partner-logo animate">
-                <img src="<%= request.getContextPath() %>/Images/Partner-3.jpeg" alt="Partner 3">
+                <img src="<%= request.getContextPath() %>/assets/images/" alt="Partner 3">
             </div>
             <div class="partner-logo animate">
-                <img src="<%= request.getContextPath() %>/Images/Partner-4.jpeg" alt="Partner 4">
+                <img src="<%= request.getContextPath() %>/assets/images/" alt="Partner 4">
             </div>
         </div>
     </div>
@@ -259,8 +259,8 @@
             <h2>Join Our Mission</h2>
             <p>Be part of the movement to transform communities across Nepal.</p>
             <div class="cta-buttons">
-                <a href="<%= request.getContextPath() %>/register.jsp" class="btn btn-primary btn-lg">Get Started</a>
-                <a href="<%= request.getContextPath() %>/contact.jsp" class="btn btn-outline btn-lg">Contact Us</a>
+                <a href="<%= request.getContextPath() %>/RegisterServlet" class="btn btn-primary btn-lg">Get Started</a>
+                <a href="<%= request.getContextPath() %>/ContactServlet" class="btn btn-outline btn-lg">Contact Us</a>
             </div>
         </div>
     </div>
@@ -286,11 +286,11 @@
             <div class="footer-column">
                 <h3>Quick Links</h3>
                 <ul class="footer-links">
-                    <li><a href="/index.jsp"><i class="fas fa-chevron-right"></i> Home</a></li>
-                    <li><a href="/about.jsp"><i class="fas fa-chevron-right"></i> About Us</a></li>
-                    <li><a href="/services.jsp"><i class="fas fa-chevron-right"></i> Services</a></li>
-                    <li><a href="/reports.jsp"><i class="fas fa-chevron-right"></i> Reports</a></li>
-                    <li><a href="/contact.jsp"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+                    <li><a href="/"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="/AboutServlet"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Services</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Reports</a></li>
+                    <li><a href="ContactServlet"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
                 </ul>
             </div>
 
@@ -332,9 +332,9 @@
         <div class="footer-bottom">
             <p>&copy; 2025 Community Fix Nepal. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color: #F9A826;"></i> for Nepal</p>
             <p style="margin-top: 10px;">
-                <a href="/privacy-policy.jsp">Privacy Policy</a> |
-                <a href="/terms-of-service.jsp">Terms of Service</a> |
-                <a href="/faq.jsp">FAQ</a>
+                <a href="#">Privacy Policy</a> |
+                <a href="#">Terms of Service</a> |
+                <a href="#">FAQ</a>
             </p>
         </div>
     </div>

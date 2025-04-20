@@ -20,8 +20,8 @@
 
         <nav class="nav-menu">
             <a href="${pageContext.request.contextPath}/" class="nav-link active">Home</a>
-            <a href="${pageContext.request.contextPath}/WEB-INF/view/about.jsp" class="nav-link">About</a>
-            <a href="${pageContext.request.contextPath}/WEB-INF/view/contact.jsp" class="nav-link">Contact</a>
+            <a href="${pageContext.request.contextPath}/AboutServlet" class="nav-link">About</a>
+            <a href="${pageContext.request.contextPath}/ContactServlet" class="nav-link">Contact</a>
         </nav>
 
         <div class="auth-buttons">
@@ -33,8 +33,8 @@
             <%
             } else {
             %>
-            <a href="${pageContext.request.contextPath}/WEB-INF/view/profile.jsp" class="btn btn-outline">Profile</a>
-            <a href="${pageContext.request.contextPath}/WEB-INF/view/LoginServlet" class="btn btn-outline">Logout</a>
+            <a href="${pageContext.request.contextPath}/ProfileServlet" class="btn btn-outline">Profile</a>
+            <a href="${pageContext.request.contextPath}/" class="btn btn-outline">Logout</a>
             <%
                 }
             %>
@@ -54,7 +54,7 @@
             <p>Report and track community issues in your neighborhood. Together, we can build better communities across Nepal.</p>
             <div class="hero-buttons">
                 <a href="${pageContext.request.contextPath}/RegisterServlet" class="btn btn-primary btn-lg">Get Started</a>
-                <a href="${pageContext.request.contextPath}/WEB-INF/view/about.jsp" class="btn btn-outline btn-lg">Learn More</a>
+                <a href="${pageContext.request.contextPath}/LearnMoreServlet" class="btn btn-outline btn-lg">Learn More</a>
             </div>
         </div>
         <div class="hero-image">

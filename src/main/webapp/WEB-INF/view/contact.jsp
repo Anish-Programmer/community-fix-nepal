@@ -7,26 +7,26 @@
     <title>Contact Us - Community Fix Nepal</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="contact.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/contact.css">
 </head>
 <body>
 <!-- Header -->
 <header class="header">
     <div class="header-container">
         <div class="logo">
-            <img src="/Images/Logo.png" alt="CommunityFix Nepal Logo">
+            <img src="${pageContext.request.contextPath}/assets/images/logo.jpeg" alt="CommunityFix Nepal Logo">
             <span class="logo-text">Community Fix Nepal</span>
         </div>
 
         <nav class="nav-menu">
             <a href="<%= request.getContextPath() %>/" class="nav-link">Home</a>
-            <a href="<%= request.getContextPath() %>/about.jsp" class="nav-link">About</a>
-            <a href="<%= request.getContextPath() %>/contact.jsp" class="nav-link active">Contact</a>
+            <a href="<%= request.getContextPath() %>/AboutServlet" class="nav-link">About</a>
+            <a href="<%= request.getContextPath() %>/ContactServlet" class="nav-link active">Contact</a>
         </nav>
 
         <div class="auth-buttons">
-            <a href="<%= request.getContextPath() %>/login.jsp" class="btn btn-outline">Login</a>
-            <a href="<%= request.getContextPath() %>/register.jsp" class="btn btn-primary">Register</a>
+            <a href="<%= request.getContextPath() %>/LoginServlet\" class="btn btn-outline">Login</a>
+            <a href="<%= request.getContextPath() %>/RegisterServlet" class="btn btn-primary">Register</a>
         </div>
 
         <button class="mobile-menu-btn">
@@ -87,7 +87,7 @@
                 <h2>Send Us a Message</h2>
                 <p>Fill out the form below and we'll get back to you as soon as possible.</p>
 
-                <form class="contact-form" action="<%= request.getContextPath() %>/contact" method="post">
+                <form class="contact-form" action="<%= request.getContextPath() %>/ContactServlet" method="post">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">Full Name</label>
@@ -218,10 +218,10 @@
                 <h3>Quick Links</h3>
                 <ul class="footer-links">
                     <li><a href="<%= request.getContextPath() %>/"><i class="fas fa-chevron-right"></i> Home</a></li>
-                    <li><a href="<%= request.getContextPath() %>/about.jsp"><i class="fas fa-chevron-right"></i> About Us</a></li>
-                    <li><a href="<%= request.getContextPath() %>/services.jsp"><i class="fas fa-chevron-right"></i> Services</a></li>
-                    <li><a href="<%= request.getContextPath() %>/reports.jsp"><i class="fas fa-chevron-right"></i> Reports</a></li>
-                    <li><a href="<%= request.getContextPath() %>/contact.jsp"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+                    <li><a href="<%= request.getContextPath() %>/AboutServlet"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Services</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Reports</a></li>
+                    <li><a href="<%= request.getContextPath() %>/ContactServlet"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
                 </ul>
             </div>
 
@@ -263,9 +263,9 @@
         <div class="footer-bottom">
             <p>&copy; 2025 CommunityFix Nepal. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color: #F9A826;"></i> for Nepal</p>
             <p style="margin-top: 10px;">
-                <a href="<%= request.getContextPath() %>/privacy-policy.jsp">Privacy Policy</a> |
-                <a href="<%= request.getContextPath() %>/terms-of-service.jsp">Terms of Service</a> |
-                <a href="<%= request.getContextPath() %>/faq.jsp">FAQ</a>
+                <a href="#">Privacy Policy</a> |
+                <a href="#">Terms of Service</a> |
+                <a href="#">FAQ</a>
             </p>
         </div>
     </div>

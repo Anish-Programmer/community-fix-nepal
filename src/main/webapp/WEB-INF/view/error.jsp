@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Error - CommunityFix Nepal</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/error.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/error.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>

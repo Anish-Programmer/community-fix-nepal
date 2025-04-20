@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
             if (user.getRole() == User.Role.ADMIN) {
                 response.sendRedirect("DashboardServlet");
             } else {
-                response.sendRedirect("ReportIssueServlet");
+                response.sendRedirect("UserDashboardServlet");
             }
         } catch (IllegalArgumentException e) {
             request.setAttribute("errorMessage", e.getMessage());
