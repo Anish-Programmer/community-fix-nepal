@@ -4,7 +4,7 @@
 <%
     // Get the logged-in user from the session
     User user = (User) session.getAttribute("user");
-    String username = (user != null) ? user.getFullName() : "Admin";
+    String username = (user != null) ? user.getUsername() : "Admin";
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,8 +14,8 @@
     <title>Admin Dashboard - CommunityFix Nepal</title>
 
     <!-- Stylesheets with context path -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/adminDashboard.css">
+<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">--%>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/adminDashboard.css">
 
     <!-- Fonts and Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -31,27 +31,27 @@
         <nav>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/dashboard.jsp" class="nav-link active">
+                    <a href="${pageContext.request.contextPath}/AdminDashboardServlet" class="nav-link active">
                         <i class="fa fa-wrench"></i> Manage Issues
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/manageUsers.jsp" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/ManageUserServlet" class="nav-link">
                         <i class="fa fa-users"></i> Manage Users
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/manageCategories.jsp" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/ManageCategoriesServlet" class="nav-link">
                         <i class="fa fa-tags"></i> Manage Categories
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/report.jsp" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/ViewReportsServlet" class="nav-link">
                         <i class="fa fa-chart-bar"></i> View Reports
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/userPortal.jsp" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/UserDashboardServlet" class="nav-link">
                         <i class="fa fa-home"></i> User Portal
                     </a>
                 </li>
@@ -65,7 +65,7 @@
             <h2>Manage All Issues</h2>
             <div class="user-info">
                 <span>Welcome, <%= username %></span>
-                <a href="${pageContext.request.contextPath}/login.jsp?logout=true" class="btn btn-outline btn-sm">Logout</a>
+                <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-outline btn-sm">Logout</a>
             </div>
         </div>
 
@@ -92,7 +92,7 @@
                 <td>Road</td>
                 <td>Pothole on street</td>
                 <td>
-                    <img src="${pageContext.request.contextPath}/Images/Thumbnail.jpeg" alt="Issue Image" class="thumbnail">
+                    <img src="${pageContext.request.contextPath}/assets/images/Thumbnail.jpeg" alt="Issue Image" class="thumbnail">
                 </td>
                 <td>
                     <form action="${pageContext.request.contextPath}/update" method="post">
@@ -121,9 +121,9 @@
 
         <!-- Footer Links -->
         <div class="footer">
-            <a href="${pageContext.request.contextPath}/about.jsp">About</a>
-            <a href="${pageContext.request.contextPath}/contact.jsp">Contact</a>
-            <a href="${pageContext.request.contextPath}/login.jsp?logout=true">Logout</a>
+            <a href="${pageContext.request.contextPath}/AboutServlet">About</a>
+            <a href="${pageContext.request.contextPath}/ContactServlet">Contact</a>
+            <a href="${pageContext.request.contextPath}/LogoutServlet">Logout</a>
         </div>
     </div>
 </div>

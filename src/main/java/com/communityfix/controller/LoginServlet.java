@@ -11,9 +11,11 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
+    private static final Logger LOGGER = Logger.getLogger(LoginServlet.class.getName());
     private final UserService userService = new UserService();
 
     @Override
@@ -32,24 +34,30 @@ public class LoginServlet extends HttpServlet {
 
         try {
             User user = userService.loginUser(username, password);
+            if (user == null) {
+                LOGGER.warning("UserService returned null for username: " + username);
+                throw new IllegalArgumentException("User not found");
+            }
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
+            LOGGER.info("User logged in: " + user.getUsername() + ", Role: " + user.getRole());
 
             // Role-based redirection
             if (user.getRole() == User.Role.ADMIN) {
-                response.sendRedirect("DashboardServlet");
+                response.sendRedirect("AdminDashboardServlet");
             } else {
                 response.sendRedirect("UserDashboardServlet");
             }
         } catch (IllegalArgumentException e) {
+            LOGGER.warning("Login failed for username: " + username + ", Error: " + e.getMessage());
             request.setAttribute("errorMessage", e.getMessage());
             request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
         } catch (SQLException e) {
-            log("Database error during login: " + e.getMessage(), e);
+            LOGGER.severe("Database error during login: " + e.getMessage());
             request.setAttribute("errorMessage", "Database error: Unable to login. Please try again.");
             request.getRequestDispatcher("/WEB-INF/view/error.jsp").forward(request, response);
         } catch (Exception e) {
-            log("Unexpected error during login: " + e.getMessage(), e);
+            LOGGER.severe("Unexpected error during login: " + e.getMessage());
             request.setAttribute("errorMessage", "Unexpected error: Please contact support.");
             request.getRequestDispatcher("/WEB-INF/view/error.jsp").forward(request, response);
         }

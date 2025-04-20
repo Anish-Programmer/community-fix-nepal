@@ -25,7 +25,7 @@
         </nav>
 
         <div class="auth-buttons">
-            <a href="<%= request.getContextPath() %>/LoginServlet\" class="btn btn-outline">Login</a>
+            <a href="<%= request.getContextPath() %>/LoginServlet" class="btn btn-outline">Login</a>
             <a href="<%= request.getContextPath() %>/RegisterServlet" class="btn btn-primary">Register</a>
         </div>
 
