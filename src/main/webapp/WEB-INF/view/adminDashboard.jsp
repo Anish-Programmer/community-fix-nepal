@@ -14,7 +14,7 @@
     <title>Admin Dashboard - CommunityFix Nepal</title>
 
     <!-- Stylesheets with context path -->
-<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">--%>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/adminDashboard.css">
 
     <!-- Fonts and Icons -->
