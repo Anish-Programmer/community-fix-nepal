@@ -188,9 +188,42 @@
         </div>
 
         <div class="team-grid">
+            <!-- team members ... -->
             <div class="team-member animate">
                 <div class="member-image">
-                    <img src="<%= request.getContextPath() %>/assets/images/User-1.jpeg" alt="Samir Bhandari">
+                    <img src="<%= request.getContextPath() %>/assets/images/kushi_profile_picture.jpg" alt="Kushi Bohora">
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="member-info">
+                    <h3>Khushi Bohora</h3>
+                    <p class="member-role">Customer Service</p>
+                    <p class="member-location"></p>
+                </div>
+            </div>
+
+            <div class="team-member animate">
+                <div class="member-image">
+                    <img src="<%= request.getContextPath() %>/assets/images/pratikshya_profile_picture.jpg" alt="Pratikshya Dahal ">
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="member-info">
+                    <h3>Pratikshya Dahal</h3>
+                    <p class="member-role">Marketing</p>
+                    <p class="member-location"></p>
+                </div>
+            </div>
+
+            <div class="team-member animate">
+                <div class="member-image">
+                    <img src="<%= request.getContextPath() %>/assets/images/samir_profile_picture.jpg" alt="Samir Bhandari">
                     <div class="member-social">
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -204,9 +237,26 @@
                 </div>
             </div>
 
+
             <div class="team-member animate">
                 <div class="member-image">
-                    <img src="<%= request.getContextPath() %>/assets/images/User-2.jpeg" alt="Anish Tamang">
+                    <img src="<%= request.getContextPath() %>/assets/images/Bipan.jpg" alt="Bipan Thapa">
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="member-info">
+                    <h3>Bipan Thapa</h3>
+                    <p class="member-role">Member</p>
+                    <p class="member-location"></p>
+                </div>
+            </div>
+
+            <div class="team-member animate">
+                <div class="member-image">
+                    <img src="<%= request.getContextPath() %>/assets/images/anish_profile_picture.jpg" alt="Anish Tamang">
                     <div class="member-social">
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -220,7 +270,8 @@
                 </div>
             </div>
 
-            <!-- Additional team members go here... -->
+
+
 
         </div>
     </div>
