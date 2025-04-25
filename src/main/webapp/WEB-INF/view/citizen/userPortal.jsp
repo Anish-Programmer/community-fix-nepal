@@ -50,7 +50,7 @@
         </div>
 
         <div class="portal-cards">
-            <a href="${pageContext.request.contextPath}/profile" class="portal-card">
+            <a href="${pageContext.request.contextPath}/ProfileServlet" class="portal-card">
                 <div class="card-icon"><i class="fas fa-users"></i></div>
                 <h3 class="card-title">Manage Profile</h3>
                 <p class="card-description">Update your personal information and account settings</p>

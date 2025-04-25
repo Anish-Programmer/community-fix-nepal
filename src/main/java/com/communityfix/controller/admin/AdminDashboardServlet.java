@@ -1,4 +1,4 @@
-package com.communityfix.controller;
+package com.communityfix.controller.admin;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,7 +13,7 @@ public class AdminDashboardServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // AuthFilter ensures the user is an admin, so we can directly forward
-        request.getRequestDispatcher("/WEB-INF/view/adminDashboard.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/admin/adminDashboard.jsp").forward(request, response);
     }
 
     @Override

@@ -10,7 +10,6 @@
     <!-- Linking to custom stylesheet located in /static/css/login.css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/login.css">
 
-
     <script src="${pageContext.request.contextPath}/assets/js/scripts.js"></script>
 
     <!-- Google Fonts -->

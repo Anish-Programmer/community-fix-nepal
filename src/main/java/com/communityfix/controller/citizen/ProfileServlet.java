@@ -1,18 +1,24 @@
-package com.communityfix.controller;
+package com.communityfix.controller.citizen;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet("/UserDashboardServlet")
-public class UserDashboardServlet extends HttpServlet {
+@WebServlet("/ProfileServlet")
+public class ProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/view/userPortal.jsp").forward(request, response);
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("user") == null) {
+            response.sendRedirect("LoginServlet");
+            return;
+        }
+        request.getRequestDispatcher("/WEB-INF/view/citizen/profile.jsp").forward(request, response);
     }
 
     @Override

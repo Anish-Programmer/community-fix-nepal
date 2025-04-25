@@ -1,10 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="your.package.User" %>
+<%@ page import="com.communityfix.model.User" %>
+<%-- type casting to User object--%>
 <%
-    String username = (String) session.getAttribute("username");
+    User username = (User) session.getAttribute("user");
     if (username == null) {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("LoginServlet");
         return;
     }
     List<User> users = (List<User>) request.getAttribute("users"); // Assume it's set by servlet
@@ -15,8 +16,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Users - Community Fix Nepal</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/manageUser.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/manageUser.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -27,12 +28,12 @@
         <nav>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/dashboard.jsp" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/ManageIssueServlet" class="nav-link">
                         <i class="fas fa-tools"></i> Manage Issues
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/manageUsers.jsp" class="nav-link active">
+                    <a href="${pageContext.request.contextPath}/ManageUserServlet" class="nav-link active">
                         <i class="fas fa-users"></i> Manage Users
                     </a>
                 </li>
@@ -42,12 +43,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/report.jsp" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/ViewReportServlet" class="nav-link">
                         <i class="fas fa-chart-bar"></i> View Reports
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/userPortal.jsp" class="nav-link">
+                    <a href="${pageContext.request.contextPath}//UserDashboardServlet" class="nav-link">
                         <i class="fas fa-home"></i> User Portal
                     </a>
                 </li>

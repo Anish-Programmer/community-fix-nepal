@@ -1,14 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="your.package.User" %>
+<%@ page import="com.communityfix.model.User" %>
+<%@ page import="com.communityfix.controller.LoginServlet" %>
 <%
-  String username = (String) session.getAttribute("username");
+  User username = (User) session.getAttribute("user");
   if (username == null) {
-    response.sendRedirect("login.jsp");
+    response.sendRedirect("LoginServlet");
     return;
   }
-
-  // Assume a User object is set in the request with user data (or fetched from DB).
-  User currentUser = (User) request.getAttribute("currentUser");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,8 +14,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile - Community Fix Nepal</title>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/styles.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/profile.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/profile.css">
 
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <!-- Font Awesome Icons -->
@@ -30,7 +28,7 @@
     <nav>
       <ul class="nav-menu">
         <li class="nav-item">
-          <a href="${pageContext.request.contextPath}/profile.jsp" class="nav-link active">
+          <a href="${pageContext.request.contextPath}/ProfileServlet" class="nav-link active">
             <i class="fas fa-user"></i> Manage Profile
           </a>
         </li>
@@ -57,8 +55,8 @@
     <div class="header">
       <h2>Manage Profile</h2>
       <div class="user-info">
-        <span>Welcome, <%= username %> </span>
-        <a href="${pageContext.request.contextPath}/login?logout=true" class="btn btn-outline btn-sm">Logout</a>
+        <span>Welcome, <%= username.getUsername() %> </span>
+        <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-outline btn-sm">Logout</a>
       </div>
     </div>
 
@@ -71,27 +69,27 @@
     <% } %>
 
     <div class="profile-form">
-      <form action="${pageContext.request.contextPath}/profile" method="post" class="form">
+      <form action="${pageContext.request.contextPath}/ProfileServlet" method="post" class="form">
         <div class="form-group">
           <label for="username">Username</label>
-          <input type="text" id="username" name="username" value="<%= currentUser != null ? currentUser.getUsername() : "" %>" disabled>
+          <input type="text" id="username" name="username" value="<%= username != null ? username.getUsername() : "" %>" disabled>
           <div class="form-help">Username cannot be changed</div>
         </div>
 
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" value="<%= currentUser != null ? currentUser.getPassword() : "" %>" required>
+          <input type="password" id="password" name="password" value="<%= username != null ? username.getPassword() : "" %>" required>
           <div class="form-help">Password (min 6 chars)</div>
         </div>
 
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" value="<%= currentUser != null ? currentUser.getEmail() : "" %>" required>
+          <input type="email" id="email" name="email" value="<%= username != null ? username.getEmail() : "" %>" required>
         </div>
 
         <div class="form-group">
           <label for="phone">Phone</label>
-          <input type="text" id="phone" name="phone" value="<%= currentUser != null ? currentUser.getPhone() : "" %>" required>
+          <input type="text" id="phone" name="phone" value="<%= username != null ? username.getPhone() : "" %>" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Update Profile</button>
@@ -99,10 +97,10 @@
     </div>
 
     <div class="footer">
-      <a href="${pageContext.request.contextPath}/userPortal.jsp">Back to User Portal</a>
-      <a href="${pageContext.request.contextPath}/about.jsp">About</a>
-      <a href="${pageContext.request.contextPath}/contact.jsp">Contact</a>
-      <a href="${pageContext.request.contextPath}/login?logout=true">Logout</a>
+      <a href="${pageContext.request.contextPath}/UserDashboardServlet">Back to User Portal</a>
+      <a href="${pageContext.request.contextPath}/AboutServlet">About</a>
+      <a href="${pageContext.request.contextPath}/ContactServlet">Contact</a>
+      <a href="${pageContext.request.contextPath}/LogoutServlet">Logout</a>
     </div>
   </div>
 </div>

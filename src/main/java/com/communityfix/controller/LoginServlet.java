@@ -61,5 +61,8 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("errorMessage", "Unexpected error: Please contact support.");
             request.getRequestDispatcher("/WEB-INF/view/error.jsp").forward(request, response);
         }
+
     }
 }
+
+
