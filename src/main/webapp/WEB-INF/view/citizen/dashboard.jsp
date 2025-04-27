@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Dashboard - Community Fix Nepal</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/dashboard.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/dashboard.css">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-HgQ3PIfvN3pWw+lg/YpV08sX7XgbmEXF+F4V84lRJ3IQ6Wz5Dj+S7ikEQUYvDWn+N2eDQ7t0bT5b0PFXO0fAg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -20,16 +20,16 @@
         <nav>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/profile.jsp" class="nav-link"><i class="fa fa-user"></i> Manage Profile</a>
+                    <a href="${pageContext.request.contextPath}/ProfileServlet" class="nav-link"><i class="fa fa-user"></i> Manage Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/dashboard.jsp" class="nav-link active"><i class="fa fa-eye"></i> View Issues</a>
+                    <a href="${pageContext.request.contextPath}/ViewIssueServlet" class="nav-link active"><i class="fa fa-eye"></i> View Issues</a>
                 </li>
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/report.jsp" class="nav-link"><i class="fa fa-pen"></i> Report New Issue</a>
+                    <a href="${pageContext.request.contextPath}/ReportNewIssueServlet" class="nav-link"><i class="fa fa-pen"></i> Report New Issue</a>
                 </li>
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/searchResults.jsp" class="nav-link"><i class="fa fa-search"></i> Search Your Issues</a>
+                    <a href="${pageContext.request.contextPath}/SearchIssueServlet" class="nav-link"><i class="fa fa-search"></i> Search Your Issues</a>
                 </li>
             </ul>
         </nav>
@@ -40,7 +40,7 @@
             <h2>Your Reported Issues</h2>
             <div class="user-info">
                 <span>Welcome, <strong>Community Fix Nepal</strong> (Citizen)</span>
-                <a href="${pageContext.request.contextPath}/login.jsp?logout=true" class="btn btn-outline btn-sm"><i class="fa fa-sign-out-alt"></i> Logout</a>
+                <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-outline btn-sm"><i class="fa fa-sign-out-alt"></i> Logout</a>
             </div>
         </div>
 
@@ -80,9 +80,9 @@
         </table>
 
         <div class="footer">
-            <a href="${pageContext.request.contextPath}/about.jsp">About</a>
-            <a href="${pageContext.request.contextPath}/contact.jsp">Contact</a>
-            <a href="${pageContext.request.contextPath}/login.jsp?logout=true">Logout</a>
+            <a href="${pageContext.request.contextPath}/AboutServlet">About</a>
+            <a href="${pageContext.request.contextPath}/ContactServlet">Contact</a>
+            <a href="${pageContext.request.contextPath}/LogoutServlet">Logout</a>
         </div>
     </div>
 </div>

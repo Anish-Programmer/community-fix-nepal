@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.communityfix.model.User" %>
 <%
-    String username = (String) session.getAttribute("username");
+    User username = (User) session.getAttribute("username");
     if (username == null) {
         response.sendRedirect("login.jsp");
         return;
@@ -21,7 +21,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/searchResult.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/assets/css/searchResult.css" rel="stylesheet">
 </head>
 <body>
 <div class="dashboard-container">
@@ -29,10 +29,10 @@
         <div class="logo">CommunityFix</div>
         <nav>
             <ul class="nav-menu">
-                <li class="nav-item"><a href="${pageContext.request.contextPath}/profile.jsp" class="nav-link"><i class="fas fa-user"></i> Manage Profile</a></li>
-                <li class="nav-item"><a href="${pageContext.request.contextPath}/dashboard.jsp" class="nav-link"><i class="fas fa-eye"></i> View Issues</a></li>
-                <li class="nav-item"><a href="${pageContext.request.contextPath}/report.jsp" class="nav-link"><i class="fas fa-pencil-alt"></i> Report New Issue</a></li>
-                <li class="nav-item"><a href="${pageContext.request.contextPath}/searchResults.jsp" class="nav-link active"><i class="fas fa-search"></i> Search Your Issues</a></li>
+                <li class="nav-item"><a href="${pageContext.request.contextPath}/ProfileServlet" class="nav-link"><i class="fas fa-user"></i> Manage Profile</a></li>
+                <li class="nav-item"><a href="${pageContext.request.contextPath}/ViewIssueServlet" class="nav-link"><i class="fas fa-eye"></i> View Issues</a></li>
+                <li class="nav-item"><a href="${pageContext.request.contextPath}/ReportNewIssueServlet" class="nav-link"><i class="fas fa-pencil-alt"></i> Report New Issue</a></li>
+                <li class="nav-item"><a href="${pageContext.request.contextPath}/SearchIssueServlet" class="nav-link active"><i class="fas fa-search"></i> Search Your Issues</a></li>
             </ul>
         </nav>
     </div>
@@ -41,12 +41,12 @@
         <div class="header">
             <h2>Search Issues</h2>
             <div class="user-info">
-                <span>Welcome, <%= username %> (Citizen)</span>
-                <a href="${pageContext.request.contextPath}/login?logout=true" class="btn btn-outline btn-sm">Logout</a>
+                <span>Welcome, <%= username.getUsername() %> (Citizen)</span>
+                <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-outline btn-sm">Logout</a>
             </div>
         </div>
 
-        <form action="${pageContext.request.contextPath}/searchResults.jsp" method="get" class="search-form">
+        <form action="${pageContext.request.contextPath}/SearchIssueServlet" method="get" class="search-form">
             <input type="text" name="keyword" value="<%= keyword %>" placeholder="Enter keyword (e.g., streetlight, road)" required>
             <button type="submit">Search</button>
         </form>
@@ -85,10 +85,10 @@
         </div>
 
         <div class="footer">
-            <a href="${pageContext.request.contextPath}/userPortal.jsp">Back to User Portal</a>
-            <a href="${pageContext.request.contextPath}/about.jsp">About</a>
-            <a href="${pageContext.request.contextPath}/contact.jsp">Contact</a>
-            <a href="${pageContext.request.contextPath}/login?logout=true">Logout</a>
+            <a href="${pageContext.request.contextPath}/UserDashboardServlet">Back to User Portal</a>
+            <a href="${pageContext.request.contextPath}/AboutServlet">About</a>
+            <a href="${pageContext.request.contextPath}/ContactServlet">Contact</a>
+            <a href="${pageContext.request.contextPath}/LogoutServlet">Logout</a>
         </div>
     </div>
 </div>

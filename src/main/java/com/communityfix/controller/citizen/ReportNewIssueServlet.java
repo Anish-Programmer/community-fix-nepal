@@ -1,4 +1,4 @@
-package com.communityfix.controller.admin;
+package com.communityfix.controller.citizen;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -6,11 +6,11 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "ManageUserServlet", value = "/ManageUserServlet")
-public class ManageUserServlet extends HttpServlet {
+@WebServlet(name = "ReportNewIssueServlet", value = "/ReportNewIssueServlet")
+public class ReportNewIssueServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/view/admin/manageUser.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/view/citizen/report.jsp").forward(request, response);
     }
 
     @Override
@@ -18,4 +18,3 @@ public class ManageUserServlet extends HttpServlet {
         doGet(request, response);
     }
 }
-

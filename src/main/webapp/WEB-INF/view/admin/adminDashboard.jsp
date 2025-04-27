@@ -31,7 +31,7 @@
         <nav>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/AdminDashboardServlet" class="nav-link active">
+                    <a href="${pageContext.request.contextPath}/ManageIssueServlet" class="nav-link active">
                         <i class="fa fa-wrench"></i> Manage Issues
                     </a>
                 </li>
@@ -48,11 +48,6 @@
                 <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/ViewReportsServlet" class="nav-link">
                         <i class="fa fa-chart-bar"></i> View Reports
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/UserDashboardServlet" class="nav-link">
-                        <i class="fa fa-home"></i> User Portal
                     </a>
                 </li>
             </ul>

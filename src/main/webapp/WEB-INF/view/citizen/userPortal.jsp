@@ -27,12 +27,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/ReportIssueServlet" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/ReportNewIssueServlet" class="nav-link">
                         <i class="fas fa-pencil-alt"></i> Report New Issue
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/SearchIssuesServlet" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/SearchIssueServlet" class="nav-link">
                         <i class="fas fa-search"></i> Search Your Issues
                     </a>
                 </li>
@@ -64,14 +64,14 @@
                 <button class="btn btn-outline">VIEW ISSUES</button>
             </a>
 
-            <a href="${pageContext.request.contextPath}/ReportIssueServlet" class="portal-card">
+            <a href="${pageContext.request.contextPath}/ReportNewIssueServlet" class="portal-card">
                 <div class="card-icon"><i class="fas fa-pencil-alt"></i></div>
                 <h3 class="card-title">Report Issue</h3>
                 <p class="card-description">Submit a new community issue for resolution</p>
                 <button class="btn btn-outline">REPORT NOW</button>
-            </a>
+<%--            </a>--%>
 
-            <a href="${pageContext.request.contextPath}/SearchIssuesServlet" class="portal-card">
+            <a href="${pageContext.request.contextPath}/SearchIssueServlet" class="portal-card">
                 <div class="card-icon"><i class="fas fa-search"></i></div>
                 <h3 class="card-title">Search Issues</h3>
                 <p class="card-description">Find specific issues using keywords</p>
