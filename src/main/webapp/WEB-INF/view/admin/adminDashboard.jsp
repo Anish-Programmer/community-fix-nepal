@@ -46,7 +46,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/ViewReportsServlet" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/ViewReportServlet" class="nav-link">
                         <i class="fa fa-chart-bar"></i> View Reports
                     </a>
                 </li>

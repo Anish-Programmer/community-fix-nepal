@@ -36,6 +36,7 @@ public class LoginServlet extends HttpServlet {
             User user = userService.loginUser(username, password);
             if (user == null) {
                 LOGGER.warning("UserService returned null for username: " + username);
+                response.sendRedirect(request.getContextPath() + "login.jsp?error=1");
                 throw new IllegalArgumentException("User not found");
             }
             HttpSession session = request.getSession();
@@ -48,6 +49,7 @@ public class LoginServlet extends HttpServlet {
             } else {
                 response.sendRedirect("UserDashboardServlet");
             }
+
         } catch (IllegalArgumentException e) {
             LOGGER.warning("Login failed for username: " + username + ", Error: " + e.getMessage());
             request.setAttribute("errorMessage", e.getMessage());
