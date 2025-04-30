@@ -33,7 +33,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="${pageContext.request.contextPath}/dashboard.jsp" class="nav-link">
+          <a href="${pageContext.request.contextPath}/ViewIssueServlet" class="nav-link">
             <i class="fas fa-eye"></i> View Issues
           </a>
         </li>

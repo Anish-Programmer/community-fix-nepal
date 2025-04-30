@@ -22,7 +22,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/ViewIssuesServlet" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/ViewIssueServlet" class="nav-link">
                         <i class="fas fa-eye"></i> View Issues
                     </a>
                 </li>
@@ -57,7 +57,7 @@
                 <button class="btn btn-outline">GO TO PROFILE</button>
             </a>
 
-            <a href="${pageContext.request.contextPath}/ViewIssuesServlet" class="portal-card">
+            <a href="${pageContext.request.contextPath}/ViewIssueServlet" class="portal-card">
                 <div class="card-icon"><i class="fas fa-eye"></i></div>
                 <h3 class="card-title">View Issues</h3>
                 <p class="card-description">Check the status of your reported issues</p>
@@ -80,8 +80,8 @@
         </div>
 
         <div class="footer">
-            <a href="${pageContext.request.contextPath}/about">About</a>
-            <a href="${pageContext.request.contextPath}/contact">Contact</a>
+            <a href="${pageContext.request.contextPath}/AboutServlet">About</a>
+            <a href="${pageContext.request.contextPath}/ContactServlet">Contact</a>
             <a href="${pageContext.request.contextPath}/LogoutServlet">Logout</a>
         </div>
     </div>

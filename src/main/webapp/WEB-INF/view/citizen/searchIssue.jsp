@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.communityfix.model.User" %>
+<%@ page import="com.communityfix.controller.LoginServlet" %>
 <%
     User username = (User) session.getAttribute("username");
     if (username == null) {

@@ -6,11 +6,11 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "SearchIssueServlet", value = "/SearchIssueServlet")
-public class SearchIssueServlet extends HttpServlet {
+@WebServlet(name = "ViewIssueServlet", value = "/ViewIssueServlet")
+public class ViewIssueServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("WEB-INF/view/citizen/searchIssue.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/view/citizen/viewIssue.jsp").forward(request,response);
     }
 
     @Override
@@ -18,8 +18,3 @@ public class SearchIssueServlet extends HttpServlet {
 
     }
 }
-
-
-
-
-

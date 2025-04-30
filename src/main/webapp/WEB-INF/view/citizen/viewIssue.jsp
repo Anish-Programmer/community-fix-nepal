@@ -1,4 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page import="com.communityfix.model.User" %>
+<%@page  import="com.communityfix.controller.LoginServlet" %>
+<%
+    User username = (User) session.getAttribute("user");
+    if (username == null){
+        response.sendRedirect("LoginServlet");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +48,7 @@
         <div class="header">
             <h2>Your Reported Issues</h2>
             <div class="user-info">
-                <span>Welcome, <strong>Community Fix Nepal</strong> (Citizen)</span>
+                <span>Welcome, <%= username.getUsername() %> (Citizen)</span>
                 <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-outline btn-sm"><i class="fa fa-sign-out-alt"></i> Logout</a>
             </div>
         </div>
