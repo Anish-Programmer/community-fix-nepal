@@ -10,7 +10,7 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.communityfix.service.IssueService.Issue" %>
+<%@ page import="com.communityfix.service.IssueService" %>
 <%
     User loggedInUser = (User) session.getAttribute("user");
     if (loggedInUser == null || loggedInUser.getRole() != User.Role.ADMIN) {
@@ -68,13 +68,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/ViewReportsServlet" class="nav-link active">
+                    <a href="${pageContext.request.contextPath}/ViewReportServlet" class="nav-link active">
                         <i class="fas fa-chart-bar"></i> View Reports
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/UserDashboardServlet" class="nav-link">
-                        <i class="fas fa-home"></i> User Portal
                     </a>
                 </li>
             </ul>
@@ -86,7 +81,7 @@
         <div class="header">
             <h2>Reports & Statistics</h2>
             <div class="user-info">
-                <span>Welcome, <%= loggedInUser.getFullName() %> (<%= loggedInUser.getRole() %>)</span>
+                <span>Welcome, <%= loggedInUser.getUsername() %> (<%= loggedInUser.getRole() %>)</span>
                 <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-outline btn-sm">Logout</a>
             </div>
         </div>

@@ -1,5 +1,6 @@
 package com.communityfix.service;
 
+import com.communityfix.model.Issue;
 import com.communityfix.util.DatabaseUtil;
 
 import java.sql.Connection;
@@ -12,38 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 public class IssueService {
-
-    public static class Issue {
-        private final int issueId;
-        private final int userId;
-        private final int categoryId;
-        private final String categoryName;
-        private final String description;
-        private final String imagePath;
-        private final String status;
-        private final String comment;
-
-        public Issue(int issueId, int userId, int categoryId, String categoryName, String description, String imagePath, String status, String comment) {
-            this.issueId = issueId;
-            this.userId = userId;
-            this.categoryId = categoryId;
-            this.categoryName = categoryName;
-            this.description = description;
-            this.imagePath = imagePath;
-            this.status = status;
-            this.comment = comment;
-        }
-
-        public int getIssueId() { return issueId; }
-        public int getUserId() { return userId; }
-        public int getCategoryId() { return categoryId; }
-        public String getCategoryName() { return categoryName; }
-        public String getDescription() { return description; }
-        public String getImagePath() { return imagePath; }
-        public String getStatus() { return status; }
-        public String getComment() { return comment; }
-    }
-
     public List<Issue> getAllIssues() throws SQLException {
         List<Issue> issues = new ArrayList<>();
         try (Connection conn = DatabaseUtil.getConnection()) {

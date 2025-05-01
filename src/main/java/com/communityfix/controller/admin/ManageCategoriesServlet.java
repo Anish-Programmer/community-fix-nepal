@@ -1,16 +1,14 @@
 package com.communityfix.controller.admin;
-
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-
 import java.io.IOException;
 
-@WebServlet(name = "ManageIssueServlet", value = "/ManageIssueServlet")
-public class ManageIssueServlet extends HttpServlet {
+@WebServlet(name = "ManageCategoriesServlet", value = "/ManageCategoriesServlet")
+public class ManageCategoriesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.getRequestDispatcher("WEB-INF/view/admin/manageCategories.jsp").forward(request, response);
     }
 
     @Override

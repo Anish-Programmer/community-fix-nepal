@@ -28,7 +28,7 @@
         <nav>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/ManageIssueServlet" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/AdminDashboardServlet" class="nav-link">
                         <i class="fas fa-tools"></i> Manage Issues
                     </a>
                 </li>
@@ -38,18 +38,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/manageCategories.jsp" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/ManageCategoriesServlet" class="nav-link">
                         <i class="fas fa-tags"></i> Manage Categories
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/ViewReportServlet" class="nav-link">
                         <i class="fas fa-chart-bar"></i> View Reports
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}//UserDashboardServlet" class="nav-link">
-                        <i class="fas fa-home"></i> User Portal
                     </a>
                 </li>
             </ul>
@@ -61,7 +56,7 @@
             <h2>Manage Users</h2>
             <div class="user-info">
                 <span>Welcome, <%= username %></span>
-                <a href="${pageContext.request.contextPath}/login?logout=true" class="btn btn-outline btn-sm">Logout</a>
+                <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-outline btn-sm">Logout</a>
             </div>
         </div>
 
@@ -142,7 +137,7 @@
                             <form action="${pageContext.request.contextPath}/user" method="post"
                                   onsubmit="return confirm('Are you sure you want to delete this user?');">
                                 <input type="hidden" name="action" value="delete">
-                                <input type="hidden" name="userId" value="<%= user.getId() %>">
+                                <input type="hidden" name="userId" value="<%= user.getUserId() %>">
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                             </form>
                         </td>
@@ -156,10 +151,10 @@
         </div>
 
         <div class="footer">
-            <a href="${pageContext.request.contextPath}/adminDashboard.jsp">Back to Admin Dashboard</a>
-            <a href="${pageContext.request.contextPath}/about.jsp">About</a>
-            <a href="${pageContext.request.contextPath}/contact.jsp">Contact</a>
-            <a href="${pageContext.request.contextPath}/login?logout=true">Logout</a>
+            <a href="${pageContext.request.contextPath}/AdminDashboardServlet">Back to Admin Dashboard</a>
+            <a href="${pageContext.request.contextPath}/AboutServlet">About</a>
+            <a href="${pageContext.request.contextPath}/ContactServlet">Contact</a>
+            <a href="${pageContext.request.contextPath}/LogoutServlet">Logout</a>
         </div>
     </div>
 </div>

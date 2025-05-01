@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Categories - CommunityFix Nepal</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/manageCategories.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/manageCategories.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Add Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -18,28 +18,23 @@
         <nav>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/dashboard.jsp" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/AdminDashboardServlet" class="nav-link">
                         <i class="fas fa-tools"></i> Manage Issues
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/manageUsers.jsp" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/ManageUserServlet" class="nav-link">
                         <i class="fas fa-users"></i> Manage Users
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/manageCategories.jsp" class="nav-link active">
+                    <a href="${pageContext.request.contextPath}/ManageCategoriesServlet" class="nav-link active">
                         <i class="fas fa-tags"></i> Manage Categories
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/reports.jsp" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/ViewReportServlet" class="nav-link">
                         <i class="fas fa-chart-bar"></i> View Reports
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/userPortal.jsp" class="nav-link">
-                        <i class="fas fa-home"></i> User Portal
                     </a>
                 </li>
             </ul>
@@ -51,7 +46,7 @@
             <h2>Manage Issue Categories</h2>
             <div class="user-info">
                 <span>Welcome, Admin</span>
-                <a href="${pageContext.request.contextPath}/login.jsp?logout=true" class="btn btn-outline btn-sm">Logout</a>
+                <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-outline btn-sm">Logout</a>
             </div>
         </div>
 
@@ -112,10 +107,10 @@
         </div>
 
         <div class="footer">
-            <a href="${pageContext.request.contextPath}/adminDashboard.jsp">Back to Admin Dashboard</a>
-            <a href="${pageContext.request.contextPath}/about.jsp">About</a>
-            <a href="${pageContext.request.contextPath}/contact.jsp">Contact</a>
-            <a href="${pageContext.request.contextPath}/login.jsp?logout=true">Logout</a>
+            <a href="${pageContext.request.contextPath}/AdminDashboardServlet">Back to Admin Dashboard</a>
+            <a href="${pageContext.request.contextPath}/AboutServlet">About</a>
+            <a href="${pageContext.request.contextPath}/ContactServlet">Contact</a>
+            <a href="${pageContext.request.contextPath}/LogoutServlet">Logout</a>
         </div>
     </div>
 </div>

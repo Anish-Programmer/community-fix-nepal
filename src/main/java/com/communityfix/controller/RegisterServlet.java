@@ -26,7 +26,6 @@ public class RegisterServlet extends HttpServlet {
         String confirmPassword = request.getParameter("confirm-password");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
-
         try {
             // Validate confirm password
             if (!password.equals(confirmPassword)) {
