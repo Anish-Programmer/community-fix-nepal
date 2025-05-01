@@ -161,12 +161,12 @@ input[type="email"] {
 
 /* Primary action button (register) */
 .btn-primary {
-    background-color: #F4A460; /* Sandy brown */
+    background-color: #E69500; /* Sandy brown */
     color: white;
 }
 
 .btn-primary:hover {
-    background-color: #E68A45; /* Slightly darker on hover */
+    background-color: #E69500; /* Slightly darker on hover */
 }
 
 /* Bottom text section with login link */

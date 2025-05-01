@@ -43,7 +43,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="${pageContext.request.contextPath}/searchResults.jsp" class="nav-link">
+          <a href="${pageContext.request.contextPath}//SearchIssueServlet" class="nav-link">
             <i class="fas fa-search"></i> Search Your Issues
           </a>
         </li>

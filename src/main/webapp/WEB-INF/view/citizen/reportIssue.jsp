@@ -34,7 +34,7 @@
           <a href="${pageContext.request.contextPath}/ReportNewIssueServlet" class="nav-link active"><i class="fas fa-pencil-alt"></i> Report New Issue</a>
         </li>
         <li class="nav-item">
-          <a href="${pageContext.request.contextPath}/SearchIssuesServlet" class="nav-link"><i class="fas fa-search"></i> Search Your Issues</a>
+          <a href="${pageContext.request.contextPath}/SearchIssueServlet" class="nav-link"><i class="fas fa-search"></i> Search Your Issues</a>
         </li>
       </ul>
     </nav>

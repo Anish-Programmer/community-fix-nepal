@@ -2,7 +2,7 @@
 <%@ page import="com.communityfix.model.User" %>
 <%@ page import="com.communityfix.controller.LoginServlet" %>
 <%
-    User username = (User) session.getAttribute("username");
+    User username = (User) session.getAttribute("user");
     if (username == null) {
         response.sendRedirect("login.jsp");
         return;
