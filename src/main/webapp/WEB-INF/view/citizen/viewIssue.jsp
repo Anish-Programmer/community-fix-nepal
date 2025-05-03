@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ page import="com.communityfix.model.User" %>
-<%@page  import="com.communityfix.controller.LoginServlet" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@page import="com.communityfix.controller.LoginServlet" %>
 <%
     User username = (User) session.getAttribute("user");
     if (username == null){
@@ -53,6 +55,10 @@
             </div>
         </div>
 
+        <c:if test="${not empty errorMessage}">
+            <div class="error-message">${errorMessage}</div>
+        </c:if>
+
         <table class="issue-table">
             <thead>
             <tr>
@@ -60,31 +66,46 @@
                 <th>Description</th>
                 <th>Image</th>
                 <th>Status</th>
-                <th>Comment</th>
+                <th>Admin Comment</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>Road Damage</td>
-                <td>Potholes near the main junction causing traffic jams.</td>
-                <td><img src="${pageContext.request.contextPath}/Images/Road Damage.jpeg" alt="Issue Image" class="thumbnail" /></td>
-                <td><span class="status-badge status-pending">Pending</span></td>
-                <td>Under review by the municipality.</td>
-            </tr>
-            <tr>
-                <td>Garbage Collection</td>
-                <td>Trash not collected for over a week in Ward 4.</td>
-                <td><img src="${pageContext.request.contextPath}/Images/Garbage.jpeg" alt="Issue Image" class="thumbnail" /></td>
-                <td><span class="status-badge status-progress">In Progress</span></td>
-                <td>Team dispatched for cleanup.</td>
-            </tr>
-            <tr>
-                <td>Streetlight Issue</td>
-                <td>Lights flicker and go off randomly at night.</td>
-                <td><img src="${pageContext.request.contextPath}/Images/Streetlight.jpeg" alt="Issue Image" class="thumbnail" /></td>
-                <td><span class="status-badge status-resolved">Resolved</span></td>
-                <td>Technician repaired the faulty unit.</td>
-            </tr>
+            <c:choose>
+                <c:when test="${empty issues}">
+                    <tr>
+                        <td colspan="5">No issues reported yet.</td>
+                    </tr>
+                </c:when>
+                <c:otherwise>
+                    <c:forEach var="issue" items="${issues}">
+                        <tr>
+                            <td>${issue.categoryName}</td>
+                            <td>${issue.issueDescription}</td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${not empty issue.imageData}">
+                                        <img src="${pageContext.request.contextPath}/GetIssueImageServlet?issueId=${issue.issueId}" alt="Issue Image" class="thumbnail" />
+                                    </c:when>
+                                    <c:otherwise>
+                                        No Image
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                            <td>
+                                <span class="status-badge status-${fn:toLowerCase(issue.issueStatus)}">
+                                    <c:choose>
+                                        <c:when test="${issue.issueStatus == 'pending'}">Pending</c:when>
+                                        <c:when test="${issue.issueStatus == 'in_progress'}">In Progress</c:when>
+                                        <c:when test="${issue.issueStatus == 'resolved'}">Resolved</c:when>
+                                        <c:otherwise>${issue.issueStatus}</c:otherwise>
+                                    </c:choose>
+                                </span>
+                            </td>
+                            <td>${issue.issueAdminComment != null ? issue.issueAdminComment : 'No comment'}</td>
+                        </tr>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
             </tbody>
         </table>
 

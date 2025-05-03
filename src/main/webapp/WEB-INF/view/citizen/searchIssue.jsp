@@ -1,16 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.communityfix.model.User" %>
 <%@ page import="com.communityfix.controller.LoginServlet" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     User username = (User) session.getAttribute("user");
     if (username == null) {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("LoginServlet");
         return;
     }
-    // Assume the search keyword is passed in as a request parameter
-    String keyword = request.getParameter("keyword");
+    // Keyword is now set as a request attribute by SearchIssueServlet
+    String keyword = (String) request.getAttribute("keyword");
     if (keyword == null) {
-        keyword = "streetlight"; // Default value for testing
+        keyword = ""; // Default if not set
     }
 %>
 <!DOCTYPE html>
@@ -48,12 +49,16 @@
         </div>
 
         <form action="${pageContext.request.contextPath}/SearchIssueServlet" method="get" class="search-form">
-            <input type="text" name="keyword" value="<%= keyword %>" placeholder="Enter keyword (e.g., streetlight, road)" required>
+            <input style="padding: 15px; margin: 15px" type="text" name="keyword" value="<%= keyword %>" placeholder="Enter keyword (e.g., streetlight, road)" required>
             <button type="submit">Search</button>
         </form>
 
         <div class="search-results">
             <h3>Search Results for "<%= keyword %>"</h3>
+
+            <c:if test="${not empty errorMessage}">
+                <div class="error-message">${errorMessage}</div>
+            </c:if>
 
             <table class="issue-table">
                 <thead>
@@ -66,23 +71,44 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>Infrastructure</td>
-                    <td>Streetlight not working</td>
-                    <td><img src="${pageContext.request.contextPath}/images/Streetlight.jpeg" alt="Issue Image" class="thumbnail"></td>
-                    <td><span class="status-badge status-pending">Pending</span></td>
-                    <td>Needs urgent fix</td>
-                </tr>
-                <tr>
-                    <td>Road</td>
-                    <td>Construction on the highway near the Dharan area</td>
-                    <td><img src="${pageContext.request.contextPath}/images/RoadProgress.jpeg" alt="Issue Image" class="thumbnail"></td>
-                    <td><span class="status-badge status-progress">In Progress</span></td>
-                    <td>Work started by municipality</td>
-                </tr>
+                <c:choose>
+                    <c:when test="${empty issues}">
+                        <tr>
+                            <td colspan="5">No issues found matching "<%= keyword %>".</td>
+                        </tr>
+                    </c:when>
+                    <c:otherwise>
+                        <c:forEach var="issue" items="${issues}">
+                            <tr>
+                                <td>${issue.categoryName}</td>
+                                <td>${issue.issueDescription}</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${not empty issue.imageData}">
+                                            <img src="${pageContext.request.contextPath}/GetIssueImageServlet?issueId=${issue.issueId}" alt="Issue Image" class="thumbnail" />
+                                        </c:when>
+                                        <c:otherwise>
+                                            No Image
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-${issue.statusLowerCase}">
+                                        <c:choose>
+                                            <c:when test="${issue.issueStatus == 'pending'}">Pending</c:when>
+                                            <c:when test="${issue.issueStatus == 'in_progress'}">In Progress</c:when>
+                                            <c:when test="${issue.issueStatus == 'resolved'}">Resolved</c:when>
+                                            <c:otherwise>${issue.issueStatus}</c:otherwise>
+                                        </c:choose>
+                                    </span>
+                                </td>
+                                <td>${issue.issueAdminComment != null ? issue.issueAdminComment : 'No comment'}</td>
+                            </tr>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
                 </tbody>
             </table>
-
         </div>
 
         <div class="footer">

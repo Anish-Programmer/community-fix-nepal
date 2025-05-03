@@ -24,6 +24,62 @@ public class IssueService {
         return issueDAO.getAllIssues();
     }
 
+    public List<Issue> getIssuesByUserId(int userId) throws SQLException {
+        List<Issue> issues = new ArrayList<>();
+        String sql = "SELECT i.issue_id, i.user_id, i.category_id, c.category_name, i.issue_description, i.image_data, i.issue_status, i.issue_admin_comment " +
+                "FROM issue i " +
+                "JOIN category c ON i.category_id = c.category_id " +
+                "WHERE i.user_id = ?";
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Issue issue = new Issue();
+                    issue.setIssueId(rs.getInt("issue_id"));
+                    issue.setUserId(rs.getInt("user_id"));
+                    issue.setCategoryId(rs.getInt("category_id"));
+                    issue.setCategoryName(rs.getString("category_name"));
+                    issue.setIssueDescription(rs.getString("issue_description"));
+                    issue.setImageData(rs.getBytes("image_data"));
+                    issue.setIssueStatus(rs.getString("issue_status"));
+                    issue.setIssueAdminComment(rs.getString("issue_admin_comment"));
+                    issues.add(issue);
+                }
+            }
+        }
+        return issues;
+    }
+
+    public List<Issue> searchIssuesByKeyword(int userId, String keyword) throws SQLException {
+        List<Issue> issues = new ArrayList<>();
+        String sql = "SELECT i.issue_id, i.user_id, i.category_id, c.category_name, i.issue_description, i.image_data, i.issue_status, i.issue_admin_comment " +
+                "FROM issue i " +
+                "JOIN category c ON i.category_id = c.category_id " +
+                "WHERE i.user_id = ? AND (i.issue_description LIKE ? OR c.category_name LIKE ?)";
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            stmt.setString(2, "%" + keyword + "%");
+            stmt.setString(3, "%" + keyword + "%");
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Issue issue = new Issue();
+                    issue.setIssueId(rs.getInt("issue_id"));
+                    issue.setUserId(rs.getInt("user_id"));
+                    issue.setCategoryId(rs.getInt("category_id"));
+                    issue.setCategoryName(rs.getString("category_name"));
+                    issue.setIssueDescription(rs.getString("issue_description"));
+                    issue.setImageData(rs.getBytes("image_data"));
+                    issue.setIssueStatus(rs.getString("issue_status"));
+                    issue.setIssueAdminComment(rs.getString("issue_admin_comment"));
+                    issues.add(issue);
+                }
+            }
+        }
+        return issues;
+    }
+
     public Map<String, Integer> getSummaryStats() throws SQLException {
         Map<String, Integer> stats = new HashMap<>();
         try (Connection conn = DatabaseUtil.getConnection()) {
@@ -54,7 +110,7 @@ public class IssueService {
                     "SUM(CASE WHEN i.issue_status = 'Resolved' THEN 1 ELSE 0 END) AS resolved, " +
                     "SUM(CASE WHEN i.issue_status = 'Pending' THEN 1 ELSE 0 END) AS pending " +
                     "FROM issue i " +
-                    "JOIN categories c ON i.category_id = c.category_id " +
+                    "JOIN category c ON i.category_id = c.category_id " +
                     "GROUP BY c.category_id, c.category_name";
             try (PreparedStatement stmt = conn.prepareStatement(sql);
                  ResultSet rs = stmt.executeQuery()) {
