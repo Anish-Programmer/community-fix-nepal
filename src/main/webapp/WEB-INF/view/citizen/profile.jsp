@@ -43,7 +43,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="${pageContext.request.contextPath}//SearchIssueServlet" class="nav-link">
+          <a href="${pageContext.request.contextPath}/SearchIssueServlet" class="nav-link">
             <i class="fas fa-search"></i> Search Your Issues
           </a>
         </li>
@@ -77,19 +77,21 @@
         </div>
 
         <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" value="<%= username != null ? username.getPassword() : "" %>" required>
-          <div class="form-help">Password (min 6 chars)</div>
+          <label for="password">New Password (optional)</label>
+          <input type="password" id="password" name="password" placeholder="Enter new password to update">
+          <div class="form-help">Password (min 6 chars). Leave blank to keep current password.</div>
         </div>
 
         <div class="form-group">
           <label for="email">Email</label>
           <input type="email" id="email" name="email" value="<%= username != null ? username.getEmail() : "" %>" required>
+          <div class="form-help">Ensure this email is valid for notifications.</div>
         </div>
 
         <div class="form-group">
           <label for="phone">Phone</label>
           <input type="text" id="phone" name="phone" value="<%= username != null ? username.getPhone() : "" %>" required>
+          <div class="form-help">Use a valid phone number (e.g., +977-1234567890).</div>
         </div>
 
         <button type="submit" class="btn btn-primary">Update Profile</button>
