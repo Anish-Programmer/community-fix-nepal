@@ -1,132 +1,51 @@
-//package com.communityfix.model;
-//
-//public class Issue {
-//    private int issueId;
-//    private String description;
-//    private String imagePath;
-//    private Status status;
-//    private String adminComment;
-//    private int userId;
-//    private int categoryId;
-//
-//    public enum Status {
-//        PENDING, IN_PROGRESS, RESOLVED
-//    }
-//
-//    public Issue() {
-//        this.status = Status.PENDING;
-//    }
-//
-//    public Issue(int issueId, String description, String imagePath, Status status, String adminComment, int userId, int categoryId) {
-//        this.issueId = issueId;
-//        setDescription(description);
-//        setImagePath(imagePath);
-//        setStatus(status);
-//        setAdminComment(adminComment);
-//        this.userId = userId;
-//        this.categoryId = categoryId;
-//    }
-//
-//    public int getIssueId() {
-//        return issueId;
-//    }
-//
-//    public void setIssueId(int issueId) {
-//        this.issueId = issueId;
-//    }
-//
-//    public String getDescription() {
-//        return description;
-//    }
-//
-//    public void setDescription(String description) {
-//        if (description == null || description.trim().isEmpty()) {
-//            throw new IllegalArgumentException("Description cannot be empty");
-//        }
-//        this.description = description;
-//    }
-//
-//    public String getImagePath() {
-//        return imagePath;
-//    }
-//
-//    public void setImagePath(String imagePath) {
-//        this.imagePath = imagePath;
-//    }
-//
-//    public Status getStatus() {
-//        return status;
-//    }
-//
-//    public void setStatus(Status status) {
-//        this.status = (status != null) ? status : Status.PENDING;
-//    }
-//
-//    public String getAdminComment() {
-//        return adminComment;
-//    }
-//
-//    public void setAdminComment(String adminComment) {
-//        this.adminComment = adminComment;
-//    }
-//
-//    public int getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(int userId) {
-//        this.userId = userId;
-//    }
-//
-//    public int getCategoryId() {
-//        return categoryId;
-//    }
-//
-//    public void setCategoryId(int categoryId) {
-//        this.categoryId = categoryId;
-//    }
-//}
-
-
-
 package com.communityfix.model;
 
 public class Issue {
-    private final int issueId;
-    private final int userId;
-    private final int categoryId;
-    private final String categoryName;
-    private final String description;
-    private final String imagePath;
-    private String status;
-    private String comment;
+    private int issueId;
+    private int userId;
+    private int categoryId;
+    private String categoryName;
+    private String issueDescription; // Aligned with issue_description
+    private byte[] imageData;
+    private String issueStatus; // Aligned with issue_status
+    private String issueAdminComment; // Aligned with issue_admin_comment
 
-    public Issue(int issueId, int userId, int categoryId, String categoryName, String description, String imagePath, String status, String comment) {
+    // Constructors
+    public Issue() {}
+
+    public Issue(int issueId, int userId, int categoryId, String categoryName, String issueDescription, byte[] imageData, String issueStatus, String issueAdminComment) {
         this.issueId = issueId;
         this.userId = userId;
         this.categoryId = categoryId;
         this.categoryName = categoryName;
-        this.description = description;
-        this.imagePath = imagePath;
-        this.status = status;
-        this.comment = comment;
+        this.issueDescription = issueDescription;
+        this.imageData = imageData;
+        this.issueStatus = issueStatus;
+        this.issueAdminComment = issueAdminComment;
     }
 
+    // Getters and Setters
     public int getIssueId() { return issueId; }
+    public void setIssueId(int issueId) { this.issueId = issueId; }
+
     public int getUserId() { return userId; }
+    public void setUserId(int userId) { this.userId = userId; }
+
     public int getCategoryId() { return categoryId; }
+    public void setCategoryId(int categoryId) { this.categoryId = categoryId; }
+
     public String getCategoryName() { return categoryName; }
-    public String getDescription() { return description; }
-    public String getImagePath() { return imagePath; }
-    public String getStatus() { return status; }
-    public String getComment() { return comment; }
+    public void setCategoryName(String categoryName) { this.categoryName = categoryName; }
 
-    public void setStatus(String status) {
-        if (status == null || !status.matches("^(Pending|In Progress|Resolved)$")) {
-            throw new IllegalArgumentException("Status must be one of: Pending, In Progress, Resolved");
-        }
-        this.status = status;
-    }
+    public String getIssueDescription() { return issueDescription; }
+    public void setIssueDescription(String issueDescription) { this.issueDescription = issueDescription; }
 
-    public void setComment(String comment) { this.comment = comment; }
+    public byte[] getImageData() { return imageData; }
+    public void setImageData(byte[] imageData) { this.imageData = imageData; }
+
+    public String getIssueStatus() { return issueStatus; }
+    public void setIssueStatus(String issueStatus) { this.issueStatus = issueStatus; }
+
+    public String getIssueAdminComment() { return issueAdminComment; }
+    public void setIssueAdminComment(String issueAdminComment) { this.issueAdminComment = issueAdminComment; }
 }

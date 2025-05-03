@@ -1,10 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.communityfix.model.User" %>
+<%@ page import="com.communityfix.model.Category" %>
+<%@ page import="java.util.List" %>
 <%
-  User username = (User) session.getAttribute("user");
-  if (username == null) {
-    response.sendRedirect("login.jsp");
+  User loggedInUser = (User) session.getAttribute("user");
+  if (loggedInUser == null || loggedInUser.getRole() != User.Role.CITIZEN) {
+    response.sendRedirect(request.getContextPath() + "/LoginServlet");
     return;
+  }
+
+  @SuppressWarnings("unchecked")
+  List<Category> categories = (List<Category>) request.getAttribute("categories");
+  if (categories == null) {
+    categories = java.util.Collections.emptyList();
   }
 %>
 <!DOCTYPE html>
@@ -13,15 +21,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Report Issue - CommunityFix Nepal</title>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/report.css">
+  <link href="${pageContext.request.contextPath}/assets/css/reportNewIssue.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 <div class="dashboard-container">
   <div class="sidebar">
-    <div class="logo">CommunityFix</div>
+    <div class="logo">CommunityFix Nepal</div>
     <nav>
       <ul class="nav-menu">
         <li class="nav-item">
@@ -44,20 +52,27 @@
     <div class="header">
       <h2>Report New Issue</h2>
       <div class="user-info">
-        <span>Welcome, <%= username.getUsername() %> (Citizen)</span>
+        <span>Welcome, <%= loggedInUser.getUsername() %> (Citizen)</span>
         <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-outline btn-sm">Logout</a>
       </div>
     </div>
 
     <div class="report-form">
+      <% if (request.getAttribute("errorMessage") != null) { %>
+      <div class="alert-error"><%= request.getAttribute("errorMessage") %></div>
+      <% } %>
+      <% if (request.getAttribute("successMessage") != null) { %>
+      <div class="alert-success"><%= request.getAttribute("successMessage") %></div>
+      <% } %>
+
       <form action="${pageContext.request.contextPath}/ReportNewIssueServlet" method="post" enctype="multipart/form-data" class="form">
         <div class="form-group">
           <label for="category">Category</label>
           <select id="category" name="categoryId" required>
             <option value="">Select a category</option>
-            <option value="1">Road Damage</option>
-            <option value="2">Water Leakage</option>
-            <option value="3">Street Light Issue</option>
+            <% for (Category category : categories) { %>
+            <option value="<%= category.getCategoryId() %>"><%= category.getCategoryName() %></option>
+            <% } %>
           </select>
         </div>
 
@@ -72,8 +87,7 @@
           <label for="image">Image (Optional)</label>
           <div class="file-upload">
             <label for="image" class="file-upload-label">
-              <div class="file-upload-icon"><i class="fa fa-camera"></i>
-              </div>
+              <div class="file-upload-icon"><i class="fa fa-camera"></i></div>
               <div class="file-upload-text">Choose a file or drag it here</div>
             </label>
             <input type="file" id="image" name="image" accept="image/*">
@@ -93,5 +107,34 @@
     </div>
   </div>
 </div>
+
+<script>
+  function updateCharCount(textarea) {
+    const charCount = textarea.value.length;
+    document.getElementById("charCount").textContent = charCount;
+    if (charCount > 500) {
+      textarea.value = textarea.value.substring(0, 500);
+      document.getElementById("charCount").textContent = 500;
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const imageInput = document.getElementById("image");
+    const imagePreview = document.getElementById("image-preview");
+
+    imageInput.addEventListener("change", function() {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          imagePreview.innerHTML = `<img src="${e.target.result}" alt="Image Preview">`;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        imagePreview.innerHTML = "";
+      }
+    });
+  });
+</script>
 </body>
 </html>

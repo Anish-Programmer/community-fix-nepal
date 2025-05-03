@@ -1,5 +1,6 @@
 package com.communityfix.service;
 
+import com.communityfix.dao.IssueDAO;
 import com.communityfix.model.Issue;
 import com.communityfix.util.DatabaseUtil;
 
@@ -13,28 +14,14 @@ import java.util.List;
 import java.util.Map;
 
 public class IssueService {
+    private final IssueDAO issueDAO = new IssueDAO();
+
+    public void createIssue(Issue issue) throws SQLException {
+        issueDAO.createIssue(issue);
+    }
+
     public List<Issue> getAllIssues() throws SQLException {
-        List<Issue> issues = new ArrayList<>();
-        try (Connection conn = DatabaseUtil.getConnection()) {
-            String sql = "SELECT i.issue_id, i.user_id, i.category_id, c.category_name, i.description, i.image_path, i.status, i.comment " +
-                    "FROM issues i JOIN categories c ON i.category_id = c.category_id";
-            try (PreparedStatement stmt = conn.prepareStatement(sql);
-                 ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    issues.add(new Issue(
-                            rs.getInt("issue_id"),
-                            rs.getInt("user_id"),
-                            rs.getInt("category_id"),
-                            rs.getString("category_name"),
-                            rs.getString("description"),
-                            rs.getString("image_path"),
-                            rs.getString("status"),
-                            rs.getString("comment")
-                    ));
-                }
-            }
-        }
-        return issues;
+        return issueDAO.getAllIssues();
     }
 
     public Map<String, Integer> getSummaryStats() throws SQLException {
@@ -42,10 +29,10 @@ public class IssueService {
         try (Connection conn = DatabaseUtil.getConnection()) {
             String sql = "SELECT " +
                     "COUNT(*) AS total_issues, " +
-                    "SUM(CASE WHEN status = 'Resolved' THEN 1 ELSE 0 END) AS resolved_issues, " +
-                    "SUM(CASE WHEN status = 'Pending' THEN 1 ELSE 0 END) AS pending_issues, " +
-                    "SUM(CASE WHEN status = 'In Progress' THEN 1 ELSE 0 END) AS in_progress_issues " +
-                    "FROM issues";
+                    "SUM(CASE WHEN issue_status = 'Resolved' THEN 1 ELSE 0 END) AS resolved_issues, " +
+                    "SUM(CASE WHEN issue_status = 'Pending' THEN 1 ELSE 0 END) AS pending_issues, " +
+                    "SUM(CASE WHEN issue_status = 'In Progress' THEN 1 ELSE 0 END) AS in_progress_issues " +
+                    "FROM issue";
             try (PreparedStatement stmt = conn.prepareStatement(sql);
                  ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
@@ -64,9 +51,9 @@ public class IssueService {
         try (Connection conn = DatabaseUtil.getConnection()) {
             String sql = "SELECT c.category_name AS category, " +
                     "COUNT(*) AS reported, " +
-                    "SUM(CASE WHEN i.status = 'Resolved' THEN 1 ELSE 0 END) AS resolved, " +
-                    "SUM(CASE WHEN i.status = 'Pending' THEN 1 ELSE 0 END) AS pending " +
-                    "FROM issues i " +
+                    "SUM(CASE WHEN i.issue_status = 'Resolved' THEN 1 ELSE 0 END) AS resolved, " +
+                    "SUM(CASE WHEN i.issue_status = 'Pending' THEN 1 ELSE 0 END) AS pending " +
+                    "FROM issue i " +
                     "JOIN categories c ON i.category_id = c.category_id " +
                     "GROUP BY c.category_id, c.category_name";
             try (PreparedStatement stmt = conn.prepareStatement(sql);

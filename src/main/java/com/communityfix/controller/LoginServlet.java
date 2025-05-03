@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class LoginServlet extends HttpServlet {
     private static final Logger LOGGER = Logger.getLogger(LoginServlet.class.getName());
     private final UserService userService = new UserService();
-    String  ErrorMessage = "errorMessage";
+//    String  ErrorMessage = "errorMessage";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,15 +53,15 @@ public class LoginServlet extends HttpServlet {
 
         } catch (IllegalArgumentException e) {
             LOGGER.warning("Login failed for username: " + username + ", Error: " + e.getMessage());
-            request.setAttribute( ErrorMessage, e.getMessage());
-            request.getRequestDispatcher("/WEB-INF/view/LoginServlet").forward(request, response);
+            request.setAttribute( "errorMessage", e.getMessage());
+            request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
         } catch (SQLException e) {
             LOGGER.severe("Database error during login: " + e.getMessage());
-            request.setAttribute(ErrorMessage , "Database error: Unable to login. Please try again.");
+            request.setAttribute("errorMessage" , "Database error: Unable to login. Please try again.");
             request.getRequestDispatcher("/WEB-INF/view/error.jsp").forward(request, response);
         } catch (Exception e) {
             LOGGER.severe("Unexpected error during login: " + e.getMessage());
-            request.setAttribute(ErrorMessage, "Unexpected error: Please contact support.");
+            request.setAttribute("errorMessage", "Unexpected error: Please contact support.");
             request.getRequestDispatcher("/WEB-INF/view/error.jsp").forward(request, response);
         }
 

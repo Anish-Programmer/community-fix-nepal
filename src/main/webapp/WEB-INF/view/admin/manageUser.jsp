@@ -55,7 +55,7 @@
         <div class="header">
             <h2>Manage Users</h2>
             <div class="user-info">
-                <span>Welcome, <%= username %></span>
+                <span>Welcome, <%= username.getUsername() %></span>
                 <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-outline btn-sm">Logout</a>
             </div>
         </div>

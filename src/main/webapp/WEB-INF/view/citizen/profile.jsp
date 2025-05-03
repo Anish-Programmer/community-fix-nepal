@@ -38,7 +38,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="${pageContext.request.contextPath}/report.jsp" class="nav-link">
+          <a href="${pageContext.request.contextPath}/ReportNewIssueServlet" class="nav-link">
             <i class="fas fa-pencil-alt"></i> Report New Issue
           </a>
         </li>

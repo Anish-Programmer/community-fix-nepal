@@ -9,155 +9,66 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class IssueDAO {
+    private static final Logger LOGGER = Logger.getLogger(IssueDAO.class.getName());
+    private static final String INSERT_ISSUE_SQL = "INSERT INTO issue (user_id, category_id, issue_description, image_data, issue_status, issue_admin_comment) VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String SELECT_ALL_ISSUES_SQL = "SELECT issue_id, user_id, category_id, issue_description, image_data, issue_status, issue_admin_comment FROM issue";
 
-    public void createIssue(Issue issue) throws SQLException {
-        try (Connection conn = DatabaseUtil.getConnection()) {
-            String sql = "INSERT INTO issue (user_id, category_id, description, image_path, status, comment) VALUES (?, ?, ?, ?, ?, ?)";
-            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setInt(1, issue.getUserId());
-                stmt.setInt(2, issue.getCategoryId());
-                stmt.setString(3, issue.getDescription());
-                stmt.setString(4, issue.getImagePath());
-                stmt.setString(5, issue.getStatus());
-                stmt.setString(6, issue.getComment());
-                stmt.executeUpdate();
+
+    public int createIssue(Issue issue) throws SQLException {
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_ISSUE_SQL, new String[]{"issue_id"})) {
+
+            preparedStatement.setInt(1, issue.getUserId());
+            preparedStatement.setInt(2, issue.getCategoryId());
+            preparedStatement.setString(3, issue.getIssueDescription());
+            preparedStatement.setBytes(4, issue.getImageData());
+            preparedStatement.setString(5, issue.getIssueStatus());
+            preparedStatement.setString(6, issue.getIssueAdminComment());
+
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Creating issue failed, no rows affected.");
             }
-        }
-    }
 
-    public Issue getIssueById(int issueId) throws SQLException {
-        try (Connection conn = DatabaseUtil.getConnection()) {
-            String sql = "SELECT i.issue_id, i.user_id, i.category_id, c.category_name, i.description, i.image_path, i.status, i.comment " +
-                    "FROM issue i JOIN categories c ON i.category_id = c.category_id " +
-                    "WHERE i.issue_id = ?";
-            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setInt(1, issueId);
-                try (ResultSet rs = stmt.executeQuery()) {
-                    if (rs.next()) {
-                        return new Issue(
-                                rs.getInt("issue_id"),
-                                rs.getInt("user_id"),
-                                rs.getInt("category_id"),
-                                rs.getString("category_name"),
-                                rs.getString("description"),
-                                rs.getString("image_path"),
-                                rs.getString("status"),
-                                rs.getString("comment")
-                        );
-                    }
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                } else {
+                    throw new SQLException("Creating issue failed, no ID obtained.");
                 }
             }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Database error while creating issue", e);
+            throw e;
         }
-        return null;
     }
 
     public List<Issue> getAllIssues() throws SQLException {
         List<Issue> issues = new ArrayList<>();
-        try (Connection conn = DatabaseUtil.getConnection()) {
-            String sql = "SELECT i.issue_id, i.user_id, i.category_id, c.category_name, i.description, i.image_path, i.status, i.comment " +
-                    "FROM issue i JOIN categories c ON i.category_id = c.category_id";
-            try (PreparedStatement stmt = conn.prepareStatement(sql);
-                 ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    issues.add(new Issue(
-                            rs.getInt("issue_id"),
-                            rs.getInt("user_id"),
-                            rs.getInt("category_id"),
-                            rs.getString("category_name"),
-                            rs.getString("description"),
-                            rs.getString("image_path"),
-                            rs.getString("status"),
-                            rs.getString("comment")
-                    ));
-                }
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ISSUES_SQL);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                Issue issue = new Issue();
+                issue.setIssueId(resultSet.getInt("issue_id"));
+                issue.setUserId(resultSet.getInt("user_id"));
+                issue.setCategoryId(resultSet.getInt("category_id"));
+                issue.setIssueDescription(resultSet.getString("issue_description"));
+                issue.setImageData(resultSet.getBytes("image_data"));
+                issue.setIssueStatus(resultSet.getString("issue_status"));
+                issue.setIssueAdminComment(resultSet.getString("issue_admin_comment"));
+                issues.add(issue);
             }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Database error while fetching all issues", e);
+            throw e;
         }
         return issues;
-    }
-
-    public List<Issue> getIssuesByUserId(int userId) throws SQLException {
-        List<Issue> issues = new ArrayList<>();
-        try (Connection conn = DatabaseUtil.getConnection()) {
-            String sql = "SELECT i.issue_id, i.user_id, i.category_id, c.category_name, i.description, i.image_path, i.status, i.comment " +
-                    "FROM issue i JOIN categories c ON i.category_id = c.category_id " +
-                    "WHERE i.user_id = ?";
-            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setInt(1, userId);
-                try (ResultSet rs = stmt.executeQuery()) {
-                    while (rs.next()) {
-                        issues.add(new Issue(
-                                rs.getInt("issue_id"),
-                                rs.getInt("user_id"),
-                                rs.getInt("category_id"),
-                                rs.getString("category_name"),
-                                rs.getString("description"),
-                                rs.getString("image_path"),
-                                rs.getString("status"),
-                                rs.getString("comment")
-                        ));
-                    }
-                }
-            }
-        }
-        return issues;
-    }
-
-    public List<Issue> getIssuesByCategoryId(int categoryId) throws SQLException {
-        List<Issue> issues = new ArrayList<>();
-        try (Connection conn = DatabaseUtil.getConnection()) {
-            String sql = "SELECT i.issue_id, i.user_id, i.category_id, c.category_name, i.description, i.image_path, i.status, i.comment " +
-                    "FROM issue i JOIN categories c ON i.category_id = c.category_id " +
-                    "WHERE i.category_id = ?";
-            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setInt(1, categoryId);
-                try (ResultSet rs = stmt.executeQuery()) {
-                    while (rs.next()) {
-                        issues.add(new Issue(
-                                rs.getInt("issue_id"),
-                                rs.getInt("user_id"),
-                                rs.getInt("category_id"),
-                                rs.getString("category_name"),
-                                rs.getString("description"),
-                                rs.getString("image_path"),
-                                rs.getString("status"),
-                                rs.getString("comment")
-                        ));
-                    }
-                }
-            }
-        }
-        return issues;
-    }
-
-    public void updateIssue(Issue issue) throws SQLException {
-        try (Connection conn = DatabaseUtil.getConnection()) {
-            String sql = "UPDATE issue SET description = ?, image_path = ?, status = ?, comment = ? WHERE issue_id = ?";
-            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setString(1, issue.getDescription());
-                stmt.setString(2, issue.getImagePath());
-                stmt.setString(3, issue.getStatus());
-                stmt.setString(4, issue.getComment());
-                stmt.setInt(5, issue.getIssueId());
-                int rowsUpdated = stmt.executeUpdate();
-                if (rowsUpdated == 0) {
-                    throw new SQLException("No issue found with issue_id: " + issue.getIssueId());
-                }
-            }
-        }
-    }
-
-    public void deleteIssue(int issueId) throws SQLException {
-        try (Connection conn = DatabaseUtil.getConnection()) {
-            String sql = "DELETE FROM issue WHERE issue_id = ?";
-            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setInt(1, issueId);
-                int rowsDeleted = stmt.executeUpdate();
-                if (rowsDeleted == 0) {
-                    throw new SQLException("No issue found with issue_id: " + issueId);
-                }
-            }
-        }
     }
 }
