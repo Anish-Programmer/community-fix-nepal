@@ -2,16 +2,16 @@
 <%@ page import="com.communityfix.model.User" %>
 <%@ page import="com.communityfix.controller.LoginServlet" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
     User username = (User) session.getAttribute("user");
     if (username == null) {
         response.sendRedirect("LoginServlet");
         return;
     }
-    // Keyword is now set as a request attribute by SearchIssueServlet
     String keyword = (String) request.getAttribute("keyword");
     if (keyword == null) {
-        keyword = ""; // Default if not set
+        keyword = "";
     }
 %>
 <!DOCTYPE html>
@@ -93,7 +93,7 @@
                                     </c:choose>
                                 </td>
                                 <td>
-                                    <span class="status-badge status-${issue.statusLowerCase}">
+                                    <span class="status-badge status-${fn:toLowerCase(issue.issueStatus)}">
                                         <c:choose>
                                             <c:when test="${issue.issueStatus == 'pending'}">Pending</c:when>
                                             <c:when test="${issue.issueStatus == 'in_progress'}">In Progress</c:when>

@@ -31,7 +31,9 @@ public class SearchIssueServlet extends HttpServlet {
 
         String keyword = request.getParameter("keyword");
         if (keyword == null || keyword.trim().isEmpty()) {
-            keyword = ""; // Default to empty for no filtering
+            request.setAttribute("errorMessage", "Please enter a keyword to search.");
+            request.getRequestDispatcher("/WEB-INF/view/citizen/searchIssue.jsp").forward(request, response);
+            return;
         }
 
         try {
