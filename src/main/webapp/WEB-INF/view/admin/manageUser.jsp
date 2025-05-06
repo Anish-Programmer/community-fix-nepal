@@ -69,45 +69,7 @@
         <% } %>
 
         <div class="content-grid">
-            <div class="user-form">
-                <h3>Add New User</h3>
-                <form action="${pageContext.request.contextPath}/user" method="post" class="form">
-                    <input type="hidden" name="action" value="add">
 
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" id="username" name="username" placeholder="Username" required>
-                        <div class="form-help">Username (3-20 alphanumeric)</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" placeholder="Password" required>
-                        <div class="form-help">Password (min 6 chars)</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="role">Role</label>
-                        <select id="role" name="role" required>
-                            <option value="">Select Role</option>
-                            <option value="Citizen">Citizen</option>
-                            <option value="Admin">Admin</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Email" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone">Phone</label>
-                        <input type="text" id="phone" name="phone" placeholder="Phone Number">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Add User</button>
-                </form>
-            </div>
 
             <div>
                 <h3>Existing Users</h3>

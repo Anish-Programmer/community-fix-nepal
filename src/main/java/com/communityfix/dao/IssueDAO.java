@@ -16,7 +16,7 @@ public class IssueDAO {
     private static final Logger LOGGER = Logger.getLogger(IssueDAO.class.getName());
     private static final String INSERT_ISSUE_SQL = "INSERT INTO issue (user_id, category_id, issue_description, image_data, issue_status, issue_admin_comment) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String SELECT_ALL_ISSUES_SQL = "SELECT issue_id, user_id, category_id, issue_description, image_data, issue_status, issue_admin_comment FROM issue";
-
+    private static final String UPDATE_ISSUE_SQL = "UPDATE issue SET issue_status = ?, issue_admin_comment = ? WHERE issue_id = ?";
 
     public int createIssue(Issue issue) throws SQLException {
         try (Connection connection = DatabaseUtil.getConnection();
@@ -70,5 +70,40 @@ public class IssueDAO {
             throw e;
         }
         return issues;
+    }
+
+    public void deleteIssue(int issueId) throws SQLException {
+        String sql = "DELETE FROM issue WHERE issue_id = ?";
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, issueId);
+            stmt.executeUpdate();
+        }
+    }
+
+    public void updateIssueStatus(int issueId, String newStatus) throws SQLException {
+        String sql = "UPDATE issue SET issue_status = ? WHERE issue_id = ?";
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, newStatus);
+            stmt.setInt(2, issueId);
+            stmt.executeUpdate();
+        }
+    }
+
+    public void updateIssue(int issueId, String newStatus, String adminComment) throws SQLException {
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(UPDATE_ISSUE_SQL)) {
+            stmt.setString(1, newStatus);
+            stmt.setString(2, adminComment);
+            stmt.setInt(3, issueId);
+            int affectedRows = stmt.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Updating issue failed, no rows affected.");
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Database error while updating issue", e);
+            throw e;
+        }
     }
 }
