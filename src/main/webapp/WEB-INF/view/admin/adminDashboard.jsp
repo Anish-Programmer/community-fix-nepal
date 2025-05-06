@@ -71,7 +71,7 @@
                 <button class="btn btn-outline">Manage Categories</button>
                 <%--            </a>--%>
 
-                <a href="${pageContext.request.contextPath}/SearchIssueServlet" class="portal-card">
+                <a href="${pageContext.request.contextPath}/ViewReportServlet" class="portal-card">
                     <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
                     <h3 class="card-title">View Reports</h3>
                     <p class="card-description">Analyze system usage and issue statistics</p>

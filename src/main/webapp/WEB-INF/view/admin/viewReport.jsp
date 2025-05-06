@@ -18,7 +18,7 @@
         return;
     }
 
-    // Retrieve report data set by ViewReportsServlet
+    // Retrieve report data set by ViewReportServlet
     Map<String, Integer> summaryStats = (Map<String, Integer>) request.getAttribute("summaryStats");
     List<Map<String, Object>> issuesByCategory = (List<Map<String, Object>>) request.getAttribute("issuesByCategory");
 
@@ -86,6 +86,13 @@
             </div>
         </div>
 
+        <% if (request.getAttribute("message") != null) { %>
+        <div class="alert alert-success"><%= request.getAttribute("message") %></div>
+        <% } %>
+        <% if (request.getAttribute("error") != null) { %>
+        <div class="alert alert-error"><%= request.getAttribute("error") %></div>
+        <% } %>
+
         <!-- Summary Cards -->
         <div class="report-cards">
             <div class="report-card">
@@ -124,9 +131,9 @@
             %>
             <tr>
                 <td><%= categoryStats.get("category") %></td>
-                <td><%= categoryStats.get("reported") %></td>
-                <td><%= categoryStats.get("resolved") %></td>
-                <td><%= categoryStats.get("pending") %></td>
+                <td><%= categoryStats.get("reported") != null ? categoryStats.get("reported") : 0 %></td>
+                <td><%= categoryStats.get("resolved") != null ? categoryStats.get("resolved") : 0 %></td>
+                <td><%= categoryStats.get("pending") != null ? categoryStats.get("pending") : 0 %></td>
             </tr>
             <%
                 }
@@ -149,8 +156,9 @@
 
         <!-- Footer -->
         <div class="footer">
-            <a href="${pageContext.request.contextPath}/about">About</a>
-            <a href="${pageContext.request.contextPath}/contact">Contact</a>
+            <a href="${pageContext.request.contextPath}/AdminDashboardServlet">Back to Admin Dashboard</a>
+            <a href="${pageContext.request.contextPath}/AboutServlet">About</a>
+            <a href="${pageContext.request.contextPath}/ContactServlet">Contact</a>
             <a href="${pageContext.request.contextPath}/LogoutServlet">Logout</a>
         </div>
     </div>
