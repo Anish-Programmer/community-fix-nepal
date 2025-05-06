@@ -1,120 +1,84 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.communityfix.model.User" %>
-<%@ page session="true" %>
-<%
-    // Get the logged-in user from the session
-    User user = (User) session.getAttribute("user");
-    String username = (user != null) ? user.getUsername() : "Admin";
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - CommunityFix Nepal</title>
-
-    <!-- Stylesheets with context path -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/adminDashboard.css">
-
-    <!-- Fonts and Icons -->
+    <title>User Portal - CommunityFix</title>
+    <link href="${pageContext.request.contextPath}/assets/css/userPortal.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-
 <div class="dashboard-container">
-
-    <!-- Sidebar Navigation -->
     <div class="sidebar">
-        <div class="logo">COMMUNITY FIX NEPAL</div>
+        <div class="logo">CommunityFix Nepal</div>
         <nav>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/ManageIssueServlet" class="nav-link active">
-                        <i class="fa fa-wrench"></i> Manage Issues
+                    <a href="${pageContext.request.contextPath}/ManageIssueServlet" class="nav-link">
+                        <i class="fas fa-tools"></i> Manage Issues
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/ManageUserServlet" class="nav-link">
-                        <i class="fa fa-users"></i> Manage Users
+                        <i class="fas fa-users"></i> Manage Users
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/ManageCategoriesServlet" class="nav-link">
-                        <i class="fa fa-tags"></i> Manage Categories
+                        <i class="fas fa-tags"></i> Manage Categories
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/ViewReportServlet" class="nav-link">
-                        <i class="fa fa-chart-bar"></i> View Reports
+                        <i class="fas fa-chart-bar"></i> View Reports
                     </a>
                 </li>
             </ul>
         </nav>
     </div>
 
-    <!-- Main Content Area -->
     <div class="main-content">
         <div class="header">
-            <h2>Manage All Issues</h2>
+            <h2>Admin Dashboard</h2>
             <div class="user-info">
-                <span>Welcome, <%= username %></span>
-                <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-outline btn-sm">Logout</a>
+                <span>Welcome, <%= ((User) session.getAttribute("user")).getUsername() %> </span>
+                <a href="${pageContext.request.contextPath}/LogoutServlet" class="logout-btn">Logout</a>
             </div>
         </div>
 
-        <!-- Success Message (can be shown conditionally) -->
-        <div class="alert alert-success" style="display: none;">
-            Issue updated successfully.
+        <div class="portal-cards">
+            <a href="${pageContext.request.contextPath}/ManageIssueServlet" class="portal-card">
+                <div class="card-icon"><i class="fas fa-tools"></i></div>
+                <h3 class="card-title">Manage Issues</h3>
+                <p class="card-description">View and manage community-reported issues</p>
+                <button class="btn btn-outline">Manage Issues</button>
+            </a>
+
+            <a href="${pageContext.request.contextPath}/ManageUserServlet" class="portal-card">
+                <div class="card-icon"><i class="fas fa-users"></i></div>
+                <h3 class="card-title">Manage Users</h3>
+                <p class="card-description">Administer user accounts and permissions</p>
+                <button class="btn btn-outline">MANAGE USERS</button>
+            </a>
+
+            <a href="${pageContext.request.contextPath}/ManageCategoriesServlet" class="portal-card">
+                <div class="card-icon"><i class="fas fa-tags"></i></div>
+                <h3 class="card-title">Manage Categories</h3>
+                <p class="card-description">Organize issue categories for better tracking</p>
+                <button class="btn btn-outline">Manage Categories</button>
+                <%--            </a>--%>
+
+                <a href="${pageContext.request.contextPath}/SearchIssueServlet" class="portal-card">
+                    <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
+                    <h3 class="card-title">View Reports</h3>
+                    <p class="card-description">Analyze system usage and issue statistics</p>
+                    <button class="btn btn-outline">View Reports</button>
+                </a>
         </div>
 
-        <!-- Issue Management Table -->
-        <table class="issue-table">
-            <thead>
-            <tr>
-                <th>Category</th>
-                <th>Description</th>
-                <th>Image</th>
-                <th>Status</th>
-                <th>Comment</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <!-- Example row, replace with dynamic iteration -->
-            <tr>
-                <td>Road</td>
-                <td>Pothole on street</td>
-                <td>
-                    <img src="${pageContext.request.contextPath}/assets/images/Thumbnail.jpeg" alt="Issue Image" class="thumbnail">
-                </td>
-                <td>
-                    <form action="${pageContext.request.contextPath}/update" method="post">
-                        <input type="hidden" name="issueId" value="1">
-                        <select name="status" class="status-select">
-                            <option value="Pending" selected>Pending</option>
-                            <option value="In Progress">In Progress</option>
-                            <option value="Resolved">Resolved</option>
-                        </select>
-                </td>
-                <td>
-                    <input type="text" name="comment" value="Will fix soon" placeholder="Add comment">
-                </td>
-                <td class="action-buttons">
-                    <button type="submit" class="btn btn-primary btn-sm">Update</button>
-                    </form>
-                    <form action="${pageContext.request.contextPath}/delete" method="post" onsubmit="return confirm('Are you sure you want to delete this issue?');">
-                        <input type="hidden" name="issueId" value="1">
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>
-                </td>
-            </tr>
-            <!-- End row -->
-            </tbody>
-        </table>
-
-        <!-- Footer Links -->
         <div class="footer">
             <a href="${pageContext.request.contextPath}/AboutServlet">About</a>
             <a href="${pageContext.request.contextPath}/ContactServlet">Contact</a>
@@ -122,6 +86,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>

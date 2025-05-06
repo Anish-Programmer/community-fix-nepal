@@ -21,7 +21,47 @@ public class IssueService {
     }
 
     public List<Issue> getAllIssues() throws SQLException {
-        return issueDAO.getAllIssues();
+        List<Issue> issues = new ArrayList<>();
+        String sql = "SELECT i.issue_id, i.user_id, i.category_id, c.category_name, i.issue_description, i.image_data, i.issue_status, i.issue_admin_comment " +
+                "FROM issue i " +
+                "JOIN category c ON i.category_id = c.category_id";
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Issue issue = new Issue();
+                issue.setIssueId(rs.getInt("issue_id"));
+                issue.setUserId(rs.getInt("user_id"));
+                issue.setCategoryId(rs.getInt("category_id"));
+                issue.setCategoryName(rs.getString("category_name"));
+                issue.setIssueDescription(rs.getString("issue_description"));
+                issue.setImageData(rs.getBytes("image_data"));
+                issue.setIssueStatus(rs.getString("issue_status"));
+                issue.setIssueAdminComment(rs.getString("issue_admin_comment"));
+                issues.add(issue);
+            }
+        } catch (SQLException e) {
+            throw new SQLException("Error fetching issues: " + e.getMessage(), e);
+        }
+        return issues;
+    }
+
+    public void deleteIssue(int issueId) throws SQLException {
+        issueDAO.deleteIssue(issueId);
+    }
+
+    public void updateIssueStatus(int issueId, String newStatus) throws SQLException {
+        if (!newStatus.equals("pending") && !newStatus.equals("in_progress") && !newStatus.equals("resolved")) {
+            throw new IllegalArgumentException("Invalid status: " + newStatus);
+        }
+        issueDAO.updateIssueStatus(issueId, newStatus);
+    }
+
+    public void updateIssue(int issueId, String newStatus, String adminComment) throws SQLException {
+        if (!newStatus.equals("pending") && !newStatus.equals("in_progress") && !newStatus.equals("resolved")) {
+            throw new IllegalArgumentException("Invalid status: " + newStatus);
+        }
+        issueDAO.updateIssue(issueId, newStatus, adminComment);
     }
 
     public List<Issue> getIssuesByUserId(int userId) throws SQLException {
@@ -85,9 +125,9 @@ public class IssueService {
         try (Connection conn = DatabaseUtil.getConnection()) {
             String sql = "SELECT " +
                     "COUNT(*) AS total_issues, " +
-                    "SUM(CASE WHEN issue_status = 'Resolved' THEN 1 ELSE 0 END) AS resolved_issues, " +
-                    "SUM(CASE WHEN issue_status = 'Pending' THEN 1 ELSE 0 END) AS pending_issues, " +
-                    "SUM(CASE WHEN issue_status = 'In Progress' THEN 1 ELSE 0 END) AS in_progress_issues " +
+                    "SUM(CASE WHEN issue_status = 'resolved' THEN 1 ELSE 0 END) AS resolved_issues, " +
+                    "SUM(CASE WHEN issue_status = 'pending' THEN 1 ELSE 0 END) AS pending_issues, " +
+                    "SUM(CASE WHEN issue_status = 'in_progress' THEN 1 ELSE 0 END) AS in_progress_issues " +
                     "FROM issue";
             try (PreparedStatement stmt = conn.prepareStatement(sql);
                  ResultSet rs = stmt.executeQuery()) {
@@ -107,8 +147,8 @@ public class IssueService {
         try (Connection conn = DatabaseUtil.getConnection()) {
             String sql = "SELECT c.category_name AS category, " +
                     "COUNT(*) AS reported, " +
-                    "SUM(CASE WHEN i.issue_status = 'Resolved' THEN 1 ELSE 0 END) AS resolved, " +
-                    "SUM(CASE WHEN i.issue_status = 'Pending' THEN 1 ELSE 0 END) AS pending " +
+                    "SUM(CASE WHEN i.issue_status = 'resolved' THEN 1 ELSE 0 END) AS resolved, " +
+                    "SUM(CASE WHEN i.issue_status = 'pending' THEN 1 ELSE 0 END) AS pending " +
                     "FROM issue i " +
                     "JOIN category c ON i.category_id = c.category_id " +
                     "GROUP BY c.category_id, c.category_name";

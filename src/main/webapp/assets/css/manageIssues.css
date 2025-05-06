@@ -1,0 +1,125 @@
+.issue-table {
+    width: 100%;
+    max-width: 900px;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.issue-table th, .issue-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.issue-table th {
+    background-color: #f5f5f5;
+    color: #333;
+    font-weight: 600;
+}
+
+.issue-table td {
+    color: #6B7280;
+}
+
+.issue-table tr:hover {
+    background-color: rgba(42, 122, 140, 0.05);
+}
+
+.issue-table select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
+    color: #333;
+    cursor: pointer;
+}
+
+.issue-table select:focus {
+    outline: none;
+    border-color: #2A7A8C;
+}
+
+.issue-table input[type="text"] {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    width: 100%;
+    box-sizing: border-box;
+    color: #333;
+}
+
+.issue-table input[type="text"]:focus {
+    outline: none;
+    border-color: #2A7A8C;
+}
+
+.issue-table .btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.issue-table .btn-outline {
+    background-color: #F5A623; /* Orange from the image */
+    color: white;
+    border: none;
+    padding: 10px 20px; /* Slightly larger padding for a wider button */
+    font-size: 1rem;
+}
+
+.issue-table .btn-outline:hover {
+    background-color: #E5941A; /* Darker orange on hover */
+    color: white;
+}
+
+.alert-success {
+    background-color: rgba(22, 163, 74, 0.1);
+    border-left: 3px solid #16a34a;
+    color: #16a34a;
+    padding: 10px;
+    margin: 20px 0;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+}
+
+.alert-error {
+    background-color: rgba(229, 62, 62, 0.1);
+    border-left: 3px solid #e53e3e;
+    color: #e53e3e;
+    padding: 10px;
+    margin: 20px 0;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .issue-table {
+        font-size: 0.9rem;
+    }
+
+    .issue-table th, .issue-table td {
+        padding: 8px;
+    }
+
+    .issue-table select, .issue-table input[type="text"] {
+        padding: 6px;
+        font-size: 0.9rem;
+    }
+
+    .issue-table .btn {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+}
