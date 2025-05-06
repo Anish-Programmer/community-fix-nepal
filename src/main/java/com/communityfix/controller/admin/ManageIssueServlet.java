@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-@WebServlet(name = "ManageIssueServlet", value = {"/ManageIssueServlet", "/updateIssue"})
+@WebServlet(name = "ManageIssueServlet", value = "/ManageIssueServlet")
 public class ManageIssueServlet extends HttpServlet {
     private static final Logger LOGGER = Logger.getLogger(ManageIssueServlet.class.getName());
     private final IssueService issueService = new IssueService();
@@ -61,56 +61,37 @@ public class ManageIssueServlet extends HttpServlet {
             return;
         }
 
-        String servletPath = request.getServletPath();
-        if ("/updateIssue".equals(servletPath)) {
-            handleUpdateIssue(request, response);
-        } else {
-            handleManageIssue(request, response);
-        }
-    }
-
-    private void handleManageIssue(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
-        int issueId = Integer.parseInt(request.getParameter("issueId"));
-
-        try {
-            if ("delete".equals(action)) {
-                issueService.deleteIssue(issueId);
-                request.setAttribute("message", "Issue deleted successfully.");
-            } else if ("updateStatus".equals(action)) {
-                String newStatus = request.getParameter("newStatus");
-                issueService.updateIssueStatus(issueId, newStatus);
-                request.setAttribute("message", "Issue status updated to " + newStatus + ".");
-            }
-            List<Issue> issues = issueService.getAllIssues();
-            request.setAttribute("issues", issues);
-        } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, "Error processing action: " + action, e);
-            request.setAttribute("error", "Failed to process action: " + e.getMessage());
-        } catch (IllegalArgumentException e) {
-            request.setAttribute("error", e.getMessage());
-        }
-
-        request.getRequestDispatcher("/WEB-INF/view/admin/manageIssues.jsp").forward(request, response);
-    }
-
-    private void handleUpdateIssue(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             int issueId = Integer.parseInt(request.getParameter("issueId"));
             String status = request.getParameter("status");
             String comment = request.getParameter("comment");
 
-            issueService.updateIssue(issueId, status, comment);
+            if (status == null || status.trim().isEmpty()) {
+                throw new IllegalArgumentException("Status is required.");
+            }
 
-            response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().write("Issue updated successfully");
+            issueService.updateIssue(issueId, status, comment);
+            request.setAttribute("message", "Issue updated successfully.");
+        } catch (NumberFormatException e) {
+            LOGGER.log(Level.WARNING, "Invalid issue ID", e);
+            request.setAttribute("error", "Invalid issue ID: " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            LOGGER.log(Level.WARNING, "Invalid request", e);
+            request.setAttribute("error", "Invalid request: " + e.getMessage());
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Error updating issue", e);
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            response.getWriter().write("Failed to update issue: " + e.getMessage());
-        } catch (IllegalArgumentException e) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().write("Invalid request: " + e.getMessage());
+            request.setAttribute("error", "Failed to update issue: " + e.getMessage());
         }
+
+        // Always reload issues after an update attempt
+        try {
+            List<Issue> issues = issueService.getAllIssues();
+            request.setAttribute("issues", issues);
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error retrieving issues after update", e);
+            request.setAttribute("error", "Failed to load issues: " + e.getMessage());
+        }
+
+        request.getRequestDispatcher("/WEB-INF/view/admin/manageIssues.jsp").forward(request, response);
     }
 }

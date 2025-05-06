@@ -15,7 +15,9 @@ import java.util.logging.Level;
 public class IssueDAO {
     private static final Logger LOGGER = Logger.getLogger(IssueDAO.class.getName());
     private static final String INSERT_ISSUE_SQL = "INSERT INTO issue (user_id, category_id, issue_description, image_data, issue_status, issue_admin_comment) VALUES (?, ?, ?, ?, ?, ?)";
-    private static final String SELECT_ALL_ISSUES_SQL = "SELECT issue_id, user_id, category_id, issue_description, image_data, issue_status, issue_admin_comment FROM issue";
+    private static final String SELECT_ALL_ISSUES_SQL = "SELECT i.issue_id, i.user_id, i.category_id, c.category_name, i.issue_description, i.image_data, i.issue_status, i.issue_admin_comment " +
+            "FROM issue i " +
+            "LEFT JOIN category c ON i.category_id = c.category_id";
     private static final String UPDATE_ISSUE_SQL = "UPDATE issue SET issue_status = ?, issue_admin_comment = ? WHERE issue_id = ?";
 
     public int createIssue(Issue issue) throws SQLException {
@@ -59,6 +61,7 @@ public class IssueDAO {
                 issue.setIssueId(resultSet.getInt("issue_id"));
                 issue.setUserId(resultSet.getInt("user_id"));
                 issue.setCategoryId(resultSet.getInt("category_id"));
+                issue.setCategoryName(resultSet.getString("category_name"));
                 issue.setIssueDescription(resultSet.getString("issue_description"));
                 issue.setImageData(resultSet.getBytes("image_data"));
                 issue.setIssueStatus(resultSet.getString("issue_status"));

@@ -21,29 +21,7 @@ public class IssueService {
     }
 
     public List<Issue> getAllIssues() throws SQLException {
-        List<Issue> issues = new ArrayList<>();
-        String sql = "SELECT i.issue_id, i.user_id, i.category_id, c.category_name, i.issue_description, i.image_data, i.issue_status, i.issue_admin_comment " +
-                "FROM issue i " +
-                "JOIN category c ON i.category_id = c.category_id";
-        try (Connection conn = DatabaseUtil.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-            while (rs.next()) {
-                Issue issue = new Issue();
-                issue.setIssueId(rs.getInt("issue_id"));
-                issue.setUserId(rs.getInt("user_id"));
-                issue.setCategoryId(rs.getInt("category_id"));
-                issue.setCategoryName(rs.getString("category_name"));
-                issue.setIssueDescription(rs.getString("issue_description"));
-                issue.setImageData(rs.getBytes("image_data"));
-                issue.setIssueStatus(rs.getString("issue_status"));
-                issue.setIssueAdminComment(rs.getString("issue_admin_comment"));
-                issues.add(issue);
-            }
-        } catch (SQLException e) {
-            throw new SQLException("Error fetching issues: " + e.getMessage(), e);
-        }
-        return issues;
+        return issueDAO.getAllIssues();
     }
 
     public void deleteIssue(int issueId) throws SQLException {
