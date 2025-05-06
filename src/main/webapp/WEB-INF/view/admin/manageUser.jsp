@@ -96,7 +96,7 @@
                         <td><%= user.getEmail() %></td>
                         <td><%= user.getPhone() %></td>
                         <td>
-                            <form action="${pageContext.request.contextPath}/user" method="post"
+                            <form action="${pageContext.request.contextPath}/ManageUserServlet" method="post"
                                   onsubmit="return confirm('Are you sure you want to delete this user?');">
                                 <input type="hidden" name="action" value="delete">
                                 <input type="hidden" name="userId" value="<%= user.getUserId() %>">

@@ -1,4 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.communityfix.model.Category" %>
+<%@ page import="com.communityfix.model.User" %>
+<%
+    User admin = (User) session.getAttribute("user");
+    if (admin == null || admin.getRole() != User.Role.ADMIN) {
+        response.sendRedirect("LoginServlet");
+        return;
+    }
+    List<Category> categories = (List<Category>) request.getAttribute("categories");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +19,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/manageCategories.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Add Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -45,15 +55,22 @@
         <div class="header">
             <h2>Manage Issue Categories</h2>
             <div class="user-info">
-                <span>Welcome, Admin</span>
+                <span>Welcome, <%= admin.getUsername() %> (Admin)</span>
                 <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-outline btn-sm">Logout</a>
             </div>
         </div>
 
+        <% if (request.getAttribute("message") != null) { %>
+        <div class="alert alert-success"><%= request.getAttribute("message") %></div>
+        <% } %>
+        <% if (request.getAttribute("error") != null) { %>
+        <div class="alert alert-error"><%= request.getAttribute("error") %></div>
+        <% } %>
+
         <div class="content-grid">
             <div class="category-form">
                 <h3>Add New Category</h3>
-                <form action="${pageContext.request.contextPath}/category" method="post" class="form">
+                <form action="${pageContext.request.contextPath}/ManageCategoriesServlet" method="post" class="form">
                     <input type="hidden" name="action" value="add">
                     <div class="form-group">
                         <label for="name">Category Name</label>
@@ -79,28 +96,22 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <% if (categories != null && !categories.isEmpty()) {
+                        for (Category category : categories) { %>
                     <tr>
-                        <td>Waste Management</td>
-                        <td>Issues related to waste collection and disposal</td>
+                        <td><%= category.getCategoryName() %></td>
+                        <td><%= category.getDescription() != null ? category.getDescription() : "No description" %></td>
                         <td>
-                            <form action="${pageContext.request.contextPath}/category" method="post" onsubmit="return confirm('Are you sure you want to delete this category?');">
+                            <form action="${pageContext.request.contextPath}/ManageCategoriesServlet" method="post" onsubmit="return confirm('Are you sure you want to delete this category?');">
                                 <input type="hidden" name="action" value="delete">
-                                <input type="hidden" name="categoryId" value="1">
+                                <input type="hidden" name="categoryId" value="<%= category.getCategoryId() %>">
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                             </form>
                         </td>
                     </tr>
-                    <tr>
-                        <td>Road Repair</td>
-                        <td>Issues related to potholes, road damage, etc.</td>
-                        <td>
-                            <form action="${pageContext.request.contextPath}/category" method="post" onsubmit="return confirm('Are you sure you want to delete this category?');">
-                                <input type="hidden" name="action" value="delete">
-                                <input type="hidden" name="categoryId" value="2">
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
+                    <% } } else { %>
+                    <tr><td colspan="3">No categories found.</td></tr>
+                    <% } %>
                     </tbody>
                 </table>
             </div>

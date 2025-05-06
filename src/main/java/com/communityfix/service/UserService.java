@@ -5,6 +5,7 @@ import com.communityfix.model.User;
 import com.communityfix.util.PasswordUtil;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class UserService {
     private final UserDAO userDAO = new UserDAO();
@@ -24,5 +25,13 @@ public class UserService {
             throw new IllegalArgumentException("Invalid username or password");
         }
         return user;
+    }
+
+    public List<User> getAllUsers() throws SQLException {
+        return userDAO.getAllUsers();
+    }
+
+    public void deleteUser(int userId) throws SQLException {
+        userDAO.deleteUser(userId);
     }
 }
