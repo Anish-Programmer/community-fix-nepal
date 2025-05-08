@@ -77,6 +77,7 @@
         <% if (request.getAttribute("error") != null) { %>
         <div class="alert alert-error"><%= request.getAttribute("error") %></div>
         <% } %>
+
         <div class="content-grid">
             <div>
                 <h3>Existing Issues</h3>
@@ -98,7 +99,10 @@
                         <td><%= issue.getIssueDescription() %></td>
                         <td>
                             <% if (issue.getImageData() != null) { %>
-                            <img src="${pageContext.request.contextPath}/images/<%= issue.getIssueId() %>" alt="Issue Image" class="thumbnail">
+<%--                            <img style="width: fit-content()" src="${pageContext.request.contextPath}/images/<%= issue.getIssueId() %>" alt="Issue Image" class="thumbnail">--%>
+                            <img style="max-width: 150px; max-height: 150px; width: auto; height: auto; object-fit: cover; border-radius: 6px;"
+                                 src="${pageContext.request.contextPath}/images/<%= issue.getIssueId() %>"
+                                 alt="Issue Image" class="thumbnail">
                             <% } else { %>
                             <span>No Image</span>
                             <% } %>
@@ -125,6 +129,7 @@
                 </table>
             </div>
         </div>
+
         <div class="footer">
             <a href="${pageContext.request.contextPath}/AboutServlet">About</a>
             <a href="${pageContext.request.contextPath}/ContactServlet">Contact</a>

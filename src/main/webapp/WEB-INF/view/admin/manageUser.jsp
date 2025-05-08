@@ -68,7 +68,7 @@
         <div class="alert alert-error"><%= request.getAttribute("error") %></div>
         <% } %>
 
-        <div class="content-grid">
+
 
 
             <div>
@@ -110,7 +110,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+
 
         <div class="footer">
             <a href="${pageContext.request.contextPath}/AdminDashboardServlet">Back to Admin Dashboard</a>
