@@ -85,6 +85,7 @@
                     <thead>
                     <tr>
                         <th>Category</th>
+                        <th>Citizen ID</th>
                         <th>Description</th>
                         <th>Image</th>
                         <th>Status</th>
@@ -96,6 +97,7 @@
                     <% for (Issue issue : issues) { %>
                     <tr>
                         <td><%= issue.getCategoryName() != null ? issue.getCategoryName() : "Unknown" %></td>
+                        <td><%= issue.getUserId()%></td>
                         <td><%= issue.getIssueDescription() %></td>
                         <td>
                             <% if (issue.getImageData() != null) { %>
@@ -131,6 +133,7 @@
         </div>
 
         <div class="footer">
+            <a href="${pageContext.request.contextPath}/AdminDashboardServlet">Back to Admin Dashboard</a>
             <a href="${pageContext.request.contextPath}/AboutServlet">About</a>
             <a href="${pageContext.request.contextPath}/ContactServlet">Contact</a>
             <a href="${pageContext.request.contextPath}/LogoutServlet">Logout</a>

@@ -53,7 +53,7 @@
         <nav>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/AdminDashboardServlet" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/ManageIssueServlet" class="nav-link">
                         <i class="fas fa-tools"></i> Manage Issues
                     </a>
                 </li>
