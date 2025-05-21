@@ -15,6 +15,52 @@
         <location>/WEB-INF/view/error.jsp</location>
     </error-page>
 
+    <!-- HTTP Error Codes -->
+    <error-page>
+        <error-code>400</error-code>
+        <location>/WEB-INF/view/error.jsp</location>
+    </error-page>
+
+    <error-page>
+        <error-code>403</error-code>
+        <location>/WEB-INF/view/error.jsp</location>
+    </error-page>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/view/error.jsp</location>
+    </error-page>
+
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/view/error.jsp</location>
+    </error-page>
+
+    <!-- Specific Exceptions -->
+
+
+    <error-page>
+        <exception-type>java.sql.SQLException</exception-type>
+        <location>/WEB-INF/view/error.jsp</location>
+    </error-page>
+
+    <!-- Common Runtime Exceptions -->
+    <error-page>
+        <exception-type>java.lang.NullPointerException</exception-type>
+        <location>/WEB-INF/view/error.jsp</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>java.lang.IllegalArgumentException</exception-type>
+        <location>/WEB-INF/view/error.jsp</location>
+    </error-page>
+
+    <!-- Generic Exception (Catch-All) -->
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/WEB-INF/view/error.jsp</location>
+    </error-page>
+
     <!-- Filter Mapping for AuthFilter -->
     <filter>
         <filter-name>AuthFilter</filter-name>
