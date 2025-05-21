@@ -42,6 +42,12 @@
             <i class="fas fa-pencil-alt"></i> Report New Issue
           </a>
         </li>
+
+        <li class="nav-item">
+          <a href="${pageContext.request.contextPath}//SubmitNewInquiry" class="nav-link">
+            <i class="fas fa-question-circle"></i>Submit New Inquiry
+          </a>
+        </li>
         <li class="nav-item">
           <a href="${pageContext.request.contextPath}/SearchIssueServlet" class="nav-link">
             <i class="fas fa-search"></i> Search Your Issues

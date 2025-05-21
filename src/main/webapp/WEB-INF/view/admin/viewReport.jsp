@@ -67,6 +67,14 @@
                         <i class="fas fa-tags"></i> Manage Categories
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/ManageInquiryServlet" class="nav-link">
+                        <i class="fas fa-question-circle"></i> Manage Inquiries
+                    </a>
+                </li>
+
+
                 <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/ViewReportServlet" class="nav-link active">
                         <i class="fas fa-chart-bar"></i> View Reports

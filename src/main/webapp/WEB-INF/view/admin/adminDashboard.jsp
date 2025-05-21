@@ -32,6 +32,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/ManageInquiryServlet" class="nav-link">
+                        <i class="fas fa-question-circle"></i> Manage Inquiries
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/ViewReportServlet" class="nav-link">
                         <i class="fas fa-chart-bar"></i> View Reports
                     </a>
@@ -69,7 +74,14 @@
                 <h3 class="card-title">Manage Categories</h3>
                 <p class="card-description">Organize issue categories for better tracking</p>
                 <button class="btn btn-outline">Manage Categories</button>
-                <%--            </a>--%>
+            </a>
+
+            <a href="${pageContext.request.contextPath}/ManageInquiryServlet" class="portal-card">
+                <div class="card-icon"><i class="fas fa-question-circle"></i></div>
+                <h3 class="card-title">Manage Inquries</h3>
+                <p class="card-description">Manage all the citizen inquries</p>
+                <button class="btn btn-outline">Manage Inquries </button>
+            </a>
 
                 <a href="${pageContext.request.contextPath}/ViewReportServlet" class="portal-card">
                     <div class="card-icon"><i class="fas fa-chart-bar"></i></div>

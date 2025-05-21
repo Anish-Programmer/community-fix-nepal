@@ -22,7 +22,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-HgQ3PIfvN3pWw+lg/YpV08sX7XgbmEXF+F4V84lRJ3IQ6Wz5Dj+S7ikEQUYvDWn+N2eDQ7t0bT5b0PFXO0fAg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 <div class="dashboard-container">
@@ -38,6 +39,12 @@
                 </li>
                 <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/ReportNewIssueServlet" class="nav-link"><i class="fa fa-pen"></i> Report New Issue</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}//SubmitNewInquiry" class="nav-link">
+                        <i class="fas fa-question-circle"></i> Submit New Inquiry
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/SearchIssueServlet" class="nav-link"><i class="fa fa-search"></i> Search Your Issues</a>

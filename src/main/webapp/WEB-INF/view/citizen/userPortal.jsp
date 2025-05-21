@@ -32,6 +32,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/SubmitNewInquiry" class="nav-link">
+                        <i class="fas fa-question-circle"></i> Submit New Inquiry
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/SearchIssueServlet" class="nav-link">
                         <i class="fas fa-search"></i> Search Your Issues
                     </a>
@@ -69,7 +74,13 @@
                 <h3 class="card-title">Report Issue</h3>
                 <p class="card-description">Submit a new community issue for resolution</p>
                 <button class="btn btn-outline">REPORT NOW</button>
-<%--            </a>--%>
+            </a>
+            <a href="${pageContext.request.contextPath}/SubmitNewInquiry" class="portal-card">
+                <div class="card-icon"><i class="fas fa-question-circle"></i></div>
+                <h3 class="card-title">Submit Inquiry</h3>
+                <p class="card-description">Submit a new community inquiry</p>
+                <button class="btn btn-outline">Inquiry NOW</button>
+            </a>
 
             <a href="${pageContext.request.contextPath}/SearchIssueServlet" class="portal-card">
                 <div class="card-icon"><i class="fas fa-search"></i></div>

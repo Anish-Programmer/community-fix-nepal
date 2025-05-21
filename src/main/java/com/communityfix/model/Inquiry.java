@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class Inquiry {
     private int inquiryId;
     private String inquiryName;
-    private String message;
+    private String inquiryMessage; // Updated to match database column
     private LocalDateTime submittedAt;
     private int userId;
 
@@ -13,10 +13,10 @@ public class Inquiry {
         this.submittedAt = LocalDateTime.now();
     }
 
-    public Inquiry(int inquiryId, String inquiryName, String message, LocalDateTime submittedAt, int userId) {
+    public Inquiry(int inquiryId, String inquiryName, String inquiryMessage, LocalDateTime submittedAt, int userId) {
         this.inquiryId = inquiryId;
         setInquiryName(inquiryName);
-        setMessage(message);
+        setInquiryMessage(inquiryMessage);
         this.submittedAt = submittedAt != null ? submittedAt : LocalDateTime.now();
         this.userId = userId;
     }
@@ -40,15 +40,15 @@ public class Inquiry {
         this.inquiryName = inquiryName;
     }
 
-    public String getMessage() {
-        return message;
+    public String getInquiryMessage() {
+        return inquiryMessage;
     }
 
-    public void setMessage(String message) {
-        if (message == null || message.trim().isEmpty()) {
-            throw new IllegalArgumentException("Message cannot be empty");
+    public void setInquiryMessage(String inquiryMessage) {
+        if (inquiryMessage == null || inquiryMessage.trim().isEmpty()) {
+            throw new IllegalArgumentException("Inquiry message cannot be empty");
         }
-        this.message = message;
+        this.inquiryMessage = inquiryMessage;
     }
 
     public LocalDateTime getSubmittedAt() {
